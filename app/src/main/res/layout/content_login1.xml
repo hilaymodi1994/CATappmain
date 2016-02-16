@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.mihirmodi.catmain.login1"
-    tools:showIn="@layout/activity_login1">
+    tools:context=".activities.LoginScreen"
+    tools:showIn="@layout/loginscreen">
 
 </RelativeLayout>

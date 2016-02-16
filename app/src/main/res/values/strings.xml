@@ -19,4 +19,48 @@
     <string name="title_activity_signup">signup</string>
 
     <string name="baseURL">http://iwpublish.herokuapp.com/api/v1/</string>
+    <string name="title_activity_about">aboutActivity</string>
+    <string name="title_activity_importantdates">importantdatesActivity</string>
+
+
+    <string name="app1">what is cat?</string>
+    <string name="app2">•	CAT (Common Admission Test) is the premier all India management entrance exam conducted by IIMs. Last year 2,04,267 students competed for 1550+ seats making it the most competitive exam in the country.
+   \n •	The IIMs are the premier management institutes in India established by an act of Parliament. These institutes also provide consultancy and research services in various business and management globally.</string>
+    <string name="app3">Syllabus</string>
+    <string name="app4">•	The Quantitative Aptitude section comprises of fundamental mathematics, based on (10 + 2) difficulty level. Problems are found to appear from various topics like Arithmetic, Algebra, Geometry and Commercial Mathematics (Word Problems). The questions are largely based on application of mathematics to solve real-time problems.
+\n•	The Data Interpretation and Logical Reasoning section comprises of questions which are asked based on the given data. The data given might be in the form of graphs, charts, tables and paragraphs. Data Interpretation problems test the candidate\'s understanding of the data and the ability to solve problems accurately. Logical Reasoning questions check the candidate\'s ability to ratiocinate and evaluate problems.
+\n•	The Verbal Ability section comprises of questions on comprehension and usage of standard English grammar. Verbal Logic questions test the candidate\'s knowledge of arranging paragraphs in a logical order, determining the type of statements, completing the paragraphs in an appropriate way. In general, it is found that all the sections share an equal weight except CAT 2008 and CAT 2004 papers, which have a higher percentage of Verbal Ability problems.
+</string>
+    <string name="title_activity_fragmentpp1">Fragmentpp1</string>
+    <string name="title_activity_fragmentpp2">fragmentpp2</string>
+    <string name="title_activity_fragmentpp3">Fragmentpp3</string>
+    <string name="title_activity_abutiim">abutiim</string>
+    <string name="title_activity_ofcontact">ofcontact</string>
+    <string name="app5">Indian Institutes of Management (IIM)</string>
+    <string name="app6" formatted="false">•IIMs are considered India\’s premier national institutes providing quality education in management and research. IIMs primarily offer post graduate, doctoral and executive education programmes. The flagship programme of IIM, is the two year post graduate diploma popularly known as Master of Business Administration (MBA). These two year programmes are residential in nature. The Fellow Programme in Management (FPM) is a fulltime doctoral level programme in management and research equivalent to Ph.D degree. The Executive Post Graduate programmes are targeted for working professionals…
+\n•	Admission to the two year MBA programmes in IIMs are on merit, based on a rigorous selection process comprising of Group Discussions, Written Ability Test, Personal Interview and scores in the Common Admission Test which is commonly known as CAT. CAT is a management aptitude test conducted by the IIMs primarily to evaluate and shortlist candidates for the post graduate programme. It is a computer based exam available for eager and eligible candidates to register and take once a year…
+\n•	As per Government of India norms, IIMs reserve 15% seats for SC candidates, 7.5% seats for ST candidates and 27% seats for NC-OBC candidates. 3% seats are also reserved for Persons with Disabilities. IIMs also provide scholarships to deserving students who need financial support.\n•	The Indian Institutes of Management are public establishments with autonomous control over its day to today operations and curriculum. However, the overall strategy of IIMs is governed by the IIM Council, headed by Minister of Human Resource Development of the Government of India. Today, there are 19 IIMs as public autonomous institutes in India.
+    </string>
+    <string name="app7">Call on the Toll free number, Monday to Saturday 9:00AM to 5:30PM \n
+For Academic queries like eligibility,category and PWD certificate (Monday to Friday excluding holiday,from 9:00am to 5:30pm)</string>
+    <string name="app8"> phno-079-66324633/34</string>
+    <string name="app9">emaiId-cat2015@iimahd.ernet.in</string>
+    <string name="app10">Address-CATCentre \n C/oAdmissionsOffice\nIndianInstituteofManagementAhmedabad \n Vastrapur \n Ahmedabad38015 \n Gujarat, India</string>
+    <string name="app11">For queries regarding application form,payment,document uploading please call only on \n 1-800-266-0207 (Toll Free)</string>
+    <string name="app12">EmailId-cathelpdesk@iimcat.ac.in</string>
+    <string name="title_activity_pplist">pplistActivity</string>
+    <string name="title_activity_impdate">impdateActivity</string>
+    <string name="title_activity_faqcatapp">Faqcatapp</string>
+    <string name="title_activity_iimcollageslist">Iimcollageslist</string>
+    <string name="title_activity_non_iimcollage_list">NonIimcollageListActivity</string>
+    <string name="title_activity_impdoc">ImpdocActivity</string>
+    <string name="title_activity_institute_menu">InstituteMenuActivity</string>
+    <string name="title_activity_iinstitutemenu">IInstitutemenuActivity</string>
+    <string name="title_activity_institutesection">InstitutesectionActivity</string>
+    <string name="title_activity_iim_view_iim">IimViewIIMActivity</string>
+    <string name="title_activity_home1">HOme1Activity</string>
+    <string name="title_activity_non_iim_view">NOnIimViewActivity</string>
+    <string name="title_activity_home111">Home111Activity</string>
+    <string name="title_activity_quizselection">Quizselection</string>
+    <string name="title_activity_about_cat">AboutCat</string>
 </resources>

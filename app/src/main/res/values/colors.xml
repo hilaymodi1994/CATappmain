@@ -3,4 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="windowBG">#81d4fa</color>
+    <color name="google_deepPurple_50">#EDE7F6</color>
+    <color name="google_deepPurple_100">#D1C4E9</color>
+    <color name="google_deepPurple_200">#B39DDB</color>
+    <color name="google_deepPurple_300">#9575CD</color>
+    <color name="google_deepPurple_400">#7E57C2</color>
+    <color name="google_deepPurple_500">#673AB7</color>
+    <color name="google_deepPurple_600">#5E35B1</color>
+    <color name="google_deepPurple_700">#512DA8</color>
+    <color name="google_deepPurple_800">#4527A0</color>
+    <color name="google_deepPurple_900">#311B92</color>
 </resources>

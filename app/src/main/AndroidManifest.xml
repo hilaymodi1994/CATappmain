@@ -2,9 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mihirmodi.catmain">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-feature
+        android:name="android.permission.telephony"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/lo2"
@@ -16,7 +23,7 @@
             android:value="@string/app_id" />
 
         <activity
-            android:name=".splash"
+            android:name=".activities.SplashScreen"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.IntroductionScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -38,23 +45,78 @@
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name"
-            />
+            android:label="@string/app_name" />
         <activity
-            android:name=".loginActivity"
+            android:name=".activities.LogSignRedirect"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".login1"
+            android:name=".activities.LoginScreen"
             android:label="@string/title_activity_login1"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Home"
+            android:name=".activities.HomeScreen"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".signup"
+            android:name=".activities.SignupScreen"
             android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Fragmentpp1"
+            android:label="@string/title_activity_fragmentpp1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".fragmentpp2"
+            android:label="@string/title_activity_fragmentpp2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Fragmentpp3"
+            android:label="@string/title_activity_fragmentpp3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AboutIim"
+            android:label="@string/title_activity_abutiim"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.OfficialContact"
+            android:label="@string/title_activity_ofcontact"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ImportantDate"
+            android:label="@string/title_activity_impdate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.FaqCat"
+            android:label="@string/title_activity_faqcatapp"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NonIimcollageListActivity"
+            android:label="@string/title_activity_non_iimcollage_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ImportantDocument"
+            android:label="@string/title_activity_impdoc"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AllIInstituteView"
+            android:label="@string/title_activity_iinstitutemenu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.InstitutesHome"
+            android:label="@string/title_activity_institutesection"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.InstituteView"
+            android:label="@string/title_activity_iim_view_iim"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.DatabasePracScreen"
+            android:label="@string/title_activity_home111"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.AboutCat"
+            android:label="@string/title_activity_about_cat"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/pager"
+    android:background="@color/google_deepPurple_500"
+    android:padding="10dp"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <EditText
+        android:layout_width="wrap_content"
+        android:id="@+id/e1"
+        android:layout_height="wrap_content"
+        android:hint=" email"
+        android:textSize="30dp"
+        android:background="@color/google_deepPurple_200"
+        android:drawableLeft="@drawable/lo11"
+        android:textColor="#Fff"
+        android:layout_marginTop="248dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <EditText
+        android:id="@+id/e2"
+        android:drawableLeft="@drawable/lo12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint=" user name"
+        android:textSize="30dp"
+        android:background="@color/google_deepPurple_200"
+        android:textColor="#Fff"
+        android:layout_below="@+id/e1"
+        android:layout_marginTop="7dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/e1"
+        android:layout_alignEnd="@+id/e1" />
+    <EditText
+        android:drawableLeft="@drawable/lo13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="  password"
+        android:textSize="30dp"
+        android:background="@color/google_deepPurple_200"
+        android:textColor="#Fff"
+        android:layout_below="@+id/e2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/e2"
+        android:layout_alignStart="@+id/e2"
+        android:layout_alignRight="@+id/e2"
+        android:layout_alignEnd="@+id/e2"
+        android:id="@+id/e3" />
+    <Button
+        android:id="@+id/b1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="signup"
+        android:textSize="30dp"
+        android:background="@color/google_deepPurple_300"
+        android:onClick="signup"
+        android:textColor="#Fff"
+        android:textAlignment="center"
+        android:layout_below="@+id/e3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp"
+        android:layout_alignRight="@+id/e3"
+        android:layout_alignEnd="@+id/e3" />
+           <ImageButton
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/lo14"
+               android:layout_below="@+id/b1"
+               android:tint="@color/google_deepPurple_200"
+               android:layout_alignParentLeft="true"
+               android:onClick="back"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
