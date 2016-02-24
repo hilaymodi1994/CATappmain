@@ -13,11 +13,12 @@ import com.example.mihirmodi.catmain.R;
 
 public class SplashScreen extends Activity {
 
-    DatabaseHelper db = new DatabaseHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+        final DatabaseHelper db = new DatabaseHelper(this);
         ImageView i=(ImageView)findViewById(R.id.imageView);
         Animation ani= AnimationUtils.loadAnimation(getBaseContext(),R.anim.anim);
         i.startAnimation(ani);
@@ -31,8 +32,12 @@ public class SplashScreen extends Activity {
             public void onAnimationEnd(Animation animation) {
 
                 Log.d("SplashScreen","on animation end");
-                db = new DatabaseHelper(SplashScreen.this);
-                db.getWritableDatabase();
+                try {
+                    db.createDataBase();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 Intent intent=new Intent(SplashScreen.this,IntroductionScreen.class);
                 startActivity(intent);
             }

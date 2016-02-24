@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/google_deepPurple_700">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            android:textColor="#fff"
+            android:textSize="30dp"
+            android:textStyle=""
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title" />
+
+
+    </android.support.v7.widget.Toolbar>
+    <TextView
+        android:background="@color/google_deepPurple_700"
+        android:layout_below="@+id/toolbar_top"
+        android:id="@+id/t11"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+    <Button
+        android:onClick="Display"
+        android:layout_below="@+id/t11"
+        android:id="@+id/btn_display"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="display"/>
+    <Button
+        android:onClick="insert"
+        android:layout_below="@+id/btn_display"
+        android:id="@+id/btn_insrt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="insrt"/>
+    <Button
+        android:onClick="delete"
+        android:layout_below="@+id/btn_insrt"
+        android:id="@+id/btn_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="delete"/>
+    <Button
+        android:onClick="update"
+        android:layout_below="@+id/btn_delete"
+        android:id="@+id/btn_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="update"/>
+
+
+
+
+</RelativeLayout>

@@ -2,274 +2,360 @@ package com.example.mihirmodi.catmain.utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 import android.util.Log;
 
-import com.example.mihirmodi.catmain.models.Quiz;
-import com.example.mihirmodi.catmain.models.QuizQuestion;
-import com.example.mihirmodi.catmain.models.QuizQuestionOption;
-import com.example.mihirmodi.catmain.models.QuizScorecard;
-import com.example.mihirmodi.catmain.models.QuizUserAnswer;
+import com.example.mihirmodi.catmain.models.Categories;
+import com.example.mihirmodi.catmain.models.Questions;
+import com.example.mihirmodi.catmain.viewholders.CategoriesViewHolder;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    Context c;
-SQLiteDatabase db;
-    // Logcat tag
-    private static final String LOG = "DatabaseHelper";
+    SQLiteDatabase db;
+    //private static final String DATABASE_NAME = "Catapp";
+    //private static TestsDataSQLHelper mInstance = null;
+    private static final int DATABASE_VERSION = 2;
+    public static String PackageName = "com.example.mihirmodi.catmain";
+    //The Android's default system path of your application database.
+    private static String DB_PATH = Environment.getDataDirectory() + "/data/" + PackageName + "/databases/";
+    private SQLiteDatabase myDataBase;
+    private static String DB_NAME = "catappdb.sqlite";
+    private static String DB_NAME_1 = "catappdb1";
+    private static String DB_NAME_2 = "catappdb2";
+    private Context myContext;
+    // Table name
+    public static final String USERS_TABLE_NAME = "users";
+    public static final String QUESTIONS_TABLE_NAME = "questions";
+    public static final String OPTIONS_TABLE_NAME = "options";
+    public static final String ATTEMPTS_TABLE_NAME = "attempts";
+    public static final String ATTEMPT_DETAIL_TABLE_NAME = "attempt_details";
+    public static final String TESTS_TABLE_NAME = "tests";
+    public static final String CATEGORIES_TABLE_NAME = "categories";
+    public static final String QUESTION_CATEGORIES_TABLE_NAME = "question_categories";
+    // Columns
+    public static final String FullName = "fullname";
+    public static final String PhoneNo = "phoneno";
+    public static final String EmailId = "email";
+    public static final String Registered = "registered";
 
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
-
-    // Database Name
-    private static final String DATABASE_NAME = "QuizDataBase";
-
-    // Table Names
-    private static final String TABLE_QUIZ_QUESTION_OPTION = "QuizQuestionOption";
-    private static final String TABLE_QUIZ_USER_ANSWER = "QuizUserAnswer";
-    private static final String TABLE_QUIZ_SCORECARD = "QuizScorecard";
-    private static final String TABLE_user = "User";
-    private static final String TABLE_Quiz = "quiz";
-    private static final String TABLE_Quiz_question = "quiz_question";
-
-    // Common column names
-    private static final String QUIZ_SCORECARD_ID = "quiz_scorecard_id";
-    private static final String USER_ID = "user_id";
-    private static final String QUIZ_USER_ANSWER_ID = "quiz_user_answer_id";
-    private static final String QUIZ_TOTALMARKS = "quiz_totalmarks";
-    private static final String QUIZ_QUESTION_ID = "quiz_question_id";
-    private static final String QUIZ_QUESTION_OPTION_ID = "quiz_question_option_id";
-    private static final String QUIZ_OUESTION_OPTION_TEXT = "quiz_question_option_text";
-    private static final String QUIZ_OUESTION_OPTION_IS_CORRECT = "quiz_question_option_is_correct";
-    private static final  String USER_LAST_NAME="user_last_name";
-
-    private static final String USER_FIRST_NAME="user_first_name";
-    private static final String USER_EMAIL="user_email";
-    private static final String USER_PASSWORD=" user_password";
-    private static final String QUIZ_ID="quiz_id";
-    private static final String QUIZ_TITLE="quiz_title";
-    private static final String QUIZ_TIME="quiz_time";
-    private static final String QUIZ_QUESTION_TEXT="quiz_question_text";
-    private static final String QUIZ_QUESTION_MARKS="quiz_question_marks";
-
-
-    // Table Create Statements
-    // Todo table create statement
-    private static final String CREATE_TABLE_QUIZ_QUESTION_OPTION = "CREATE TABLE "
-            + TABLE_QUIZ_QUESTION_OPTION + "(" + QUIZ_QUESTION_OPTION_ID + " INTEGER PRIMARY KEY," + QUIZ_QUESTION_ID
-            + " INTEGER," + QUIZ_OUESTION_OPTION_TEXT + "  TEXT," + QUIZ_OUESTION_OPTION_IS_CORRECT
-            + "  TEXT" + "FOREIGN KEY ("+QUIZ_QUESTION_OPTION_ID+") REFERENCES "+TABLE_QUIZ_USER_ANSWER+"("+QUIZ_USER_ANSWER_ID+"));";
-
-    // Tag table create statement
-    private static final String CREATE_TABLE_QUIZ_USER_ANSWER = "CREATE TABLE " + TABLE_QUIZ_USER_ANSWER
-            + "(" + QUIZ_USER_ANSWER_ID + " INTEGER PRIMARY KEY," + QUIZ_QUESTION_ID + " INTEGER,"
-            + QUIZ_QUESTION_OPTION_ID + " INTEGER" + "FOREIGN KEY ("+QUIZ_USER_ANSWER_ID+") REFERENCES "+TABLE_QUIZ_SCORECARD+"("+QUIZ_SCORECARD_ID+"));";
-
-    // todo_tag table create statement
-    private static final String CREATE_TABLE_QUIZ_SCORECARD = "CREATE TABLE "
-            + TABLE_QUIZ_SCORECARD + "(" + QUIZ_SCORECARD_ID + " INTEGER PRIMARY KEY,"
-            + USER_ID + " INTEGER,"+ QUIZ_USER_ANSWER_ID + " INTEGER,"
-            + QUIZ_TOTALMARKS + " TEXT" + ")";
-
-    private static final String CREATE_TABLE_user = "CREATE TABLE "
-            + TABLE_user + "(" + USER_ID + " INTEGER PRIMARY KEY," + USER_LAST_NAME
-            + " TEXT," + USER_FIRST_NAME + " TEXT," + USER_EMAIL
-            + " TEXT," +      USER_PASSWORD +" TEXT"+ " FOREIGN KEY ("+USER_ID+") REFERENCES "+TABLE_QUIZ_SCORECARD+"("+QUIZ_SCORECARD_ID+"));";
-
-    // Tag table create statement
-    private static final String CREATE_TABLE_Quiz = "CREATE TABLE " + TABLE_Quiz
-            + "(" + QUIZ_ID + " INTEGER PRIMARY KEY," + QUIZ_TITLE + " TEXT,"
-            + QUIZ_TIME+ " DATETIME" + "FOREIGN KEY ("+QUIZ_ID+") REFERENCES "+TABLE_Quiz_question+"("+QUIZ_QUESTION_ID+"));";
-
-    // todo_tag table create statement
-    private static final String CREATE_TABLE_Quiz_question = "CREATE TABLE "
-            + TABLE_Quiz_question + "(" + QUIZ_ID + " INTEGER,"
-            + QUIZ_QUESTION_ID + " INTEGER PRIMARY KEY," + QUIZ_QUESTION_TEXT + " TEXT,"
-            + QUIZ_QUESTION_MARKS + " INTEGER" +"FOREIGN KEY ("+QUIZ_QUESTION_ID+") REFERENCES "+TABLE_QUIZ_QUESTION_OPTION+"("+QUIZ_QUESTION_OPTION_ID+") REFERENCES "+TABLE_QUIZ_USER_ANSWER+"("+QUIZ_USER_ANSWER_ID+"));";
-
+    public static final String TestId = "t_id";
+    public static final String UserId = "u_id";
+    public static final String TimeStamp = "timpstamp";
+    public int oldversion = -1;
+    public static final String DB_FULL_PATH = DB_PATH + DB_NAME;
+    //public static final String publishingPlatformURL = "http://iwpublish.herokuapp.com/api/v1/";
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, DB_NAME, null, DATABASE_VERSION);
+        this.myContext = context;
+
+    }
+	/*public static TestsDataSQLHelper getInstance(Context ctx) {
+        *//**
+     * use the application context as suggested by CommonsWare.
+     * this will ensure that you dont accidentally leak an Activitys
+     * context (see this article for more information:
+     * http://developer.android.com/resources/articles/avoiding-memory-leaks.html)
+     *//*
+        if (mInstance == null) {
+            mInstance = new TestsDataSQLHelper(ctx);
+        }
+        return mInstance;
+    }*/
+
+    /**
+     * Creates a empty database on the system and rewrites it with your own database.
+     */
+    public void createDataBase() throws Exception {
+
+        boolean dbExist = checkDataBase();
+
+        if (dbExist) {
+            //do nothing - database already exist
+        } else {
+
+            //By calling this method and empty database will be created into the default system path
+            //of your application so we are gonna be able to overwrite that database with our database.
+            this.getReadableDatabase();
+
+            try {
+
+                copyDataBase();
+//                copyTestLogo();
+//                copyImageFiles();
+//                copyExtraFiles();
+
+                //-- Add registered user field and remove primary key index from attempt details.
+                //SQLiteDatabase db = SQLiteDatabase.openDatabase(DB_FULL_PATH, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READWRITE);
+
+            } catch (IOException e) {
+
+                throw new Exception("Error copying database");
+
+            }
+        }
+
+    }
+
+    private boolean checkDataBase() {
+
+        SQLiteDatabase checkDB = null;
+
+        try {
+            checkDB = SQLiteDatabase.openDatabase(DB_FULL_PATH, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READONLY);
+            checkDB.close();
+        } catch (Exception e) {
+            //database does't exist yet.
+            Log.d("DB", "Db does not exist-" + e.getMessage());
+            return false;
+        }
+
+        return checkDB != null ? true : false;
+    }
+
+    private void copyDataBase() throws IOException {
+        try {
+
+            // Path to the just created empty db
+            String outFileName = DB_PATH + DB_NAME;
+
+            //Open the empty db as the output stream
+            OutputStream myOutput = new FileOutputStream(outFileName);
+
+            //transfer bytes from the inputfile to the outputfile
+            byte[] buffer = new byte[1024];
+            int length;
+
+            InputStream myInput = myContext.getAssets().open(DB_NAME_1);
+            while ((length = myInput.read(buffer)) > 0) {
+                myOutput.write(buffer);
+            }
+
+            myInput = myContext.getAssets().open(DB_NAME_2);
+            while ((length = myInput.read(buffer)) > 0) {
+                myOutput.write(buffer);
+            }
+            //Close the streams
+            myOutput.flush();
+            myOutput.close();
+            myInput.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
+    public void copyImageFiles() {
+        AssetManager assetManager = myContext.getAssets();
+        String assets[] = null;
+        try {
+            // Delete files from queadaydbimages folder as new image structure in use
+            File imgfolder = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/QueADayDBImages/");
+            // FileUtil.deleteFolder(imgfolder);
+
+
+            File file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images");
+            file.mkdir();
+            // create new image structure
+            assets = assetManager.list("");
+            InputStream is;
+            for (int i = 0; i < assets.length; i++) {
+
+                file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images/" + assets[i].split("_")[0]);
+                if (file.exists() != true) {
+                    file.mkdir();
+                } else {
+                    if (file.length() == 0) {
+                        file.mkdir();
+                    }
+                }
+
+                file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images/" + assets[i].split("_")[0] + "/queimages");
+                if (file.exists() != true) {
+                    file.mkdir();
+                } else {
+                    if (file.length() == 0) {
+                        file.mkdir();
+                    }
+                }
+
+                is = assetManager.open(assets[i]);
+                file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images/" + assets[i].split("_")[0] + "/queimages/" + assets[i].split("_")[1] + "_" + assets[i].split("_")[2]);
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileOutputStream out = new FileOutputStream(file);
+
+                byte b[] = new byte[4096];
+                while (is.read(b) != -1) {
+                    out.write(b);
+                }
+                out.close();
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void copyExtraFiles() {
+        AssetManager assetManager = myContext.getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("Extra");
+        } catch (IOException e) {
+            Log.e("tag", e.getMessage());
+        }
+
+        for (String filename : files) {
+            System.out.println("File name => " + filename);
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open("Extra/" + filename);   // if files resides inside the "Files" directory itself
+                out = new FileOutputStream(Environment.getDataDirectory() + "/data/" + PackageName + "/" + filename);
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, read);
+                }
+                in.close();
+                in = null;
+                out.flush();
+                out.close();
+                out = null;
+            } catch (Exception e) {
+                Log.e("tag", e.getMessage());
+            }
+        }
+    }
+
+    public void copyTestLogo() {
+        AssetManager assetManager = myContext.getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list("testlogo");
+        } catch (IOException e) {
+            Log.e("tag", e.getMessage());
+        }
+
+        File file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images");
+        if (file.exists() != true)
+            file.mkdir();
+
+        for (String filename : files) {
+            InputStream in = null;
+            try {
+                in = assetManager.open("testlogo/" + filename);   // if files resides inside the "Files" directory itself
+                file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images/" + filename.split("_", 2)[0]);
+                if (file.exists() != true)
+                    file.mkdir();
+
+                file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images/" + filename.split("_", 2)[0] + "/logo");
+                if (file.exists() != true)
+                    file.mkdir();
+
+                file = new File(Environment.getDataDirectory() + "/data/" + PackageName + "/Images/" + filename.split("_", 2)[0] + "/logo/" + filename.split("_", 2)[1]);
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileOutputStream out = new FileOutputStream(file);
+
+                byte b[] = new byte[4096];
+                while (in.read(b) != -1) {
+                    out.write(b);
+                }
+                out.close();
+            } catch (Exception e) {
+                Log.e("tag", e.getMessage());
+            }
+        }
+    }
+
+    public SQLiteDatabase openDataBase() throws SQLException {
+
+        //Open the database
+        String myPath = DB_PATH + DB_NAME;
+        myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.NO_LOCALIZED_COLLATORS | SQLiteDatabase.OPEN_READONLY);
+        return myDataBase;
+    }
+
+    @Override
+    public synchronized void close() {
+
+        if (myDataBase != null && myDataBase.isOpen())
+            myDataBase.close();
+
+        super.close();
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
-        // creating required tables
-        Log.d("TABLE", "Table created");
-        db.execSQL(CREATE_TABLE_QUIZ_QUESTION_OPTION);
-        db.execSQL(CREATE_TABLE_QUIZ_USER_ANSWER);
-        db.execSQL(CREATE_TABLE_QUIZ_SCORECARD);
-        db.execSQL(CREATE_TABLE_user);
-        db.execSQL(CREATE_TABLE_Quiz);
-        db.execSQL(CREATE_TABLE_Quiz_question);
-
+        Log.d("DB", "Oncreate called");
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ_QUESTION_OPTION);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ_USER_ANSWER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ_SCORECARD);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_user);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Quiz);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_Quiz_question);
+        Log.d("DB", "onUpgrade called");
+        oldversion = oldVersion;
+        if (oldVersion == 1) {
+            // copyTestLogo();
+            //  copyImageFiles();
+            // copyExtraFiles();
 
-        // create new tables
-        onCreate(db);
-    }
-    public void insert(QuizScorecard u) {
-        db=this.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put(QUIZ_SCORECARD_ID, u.getquiz_scorecard_id());
-        contentValues.put(USER_ID, u.getuser_id());
-        contentValues.put(QUIZ_USER_ANSWER_ID, u.getquiz_scorecard_id());
-        contentValues.put(QUIZ_TOTALMARKS, u.getquiz_totalmarks());
-        db.insert(TABLE_QUIZ_SCORECARD, null, contentValues);
-
-       db.close();
-
-
-    }
-    public void insertm(QuizUserAnswer m) {
-        db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(QUIZ_QUESTION_OPTION_ID, m.getquiz_question_option_id());
-        contentValues.put(QUIZ_QUESTION_ID, m.getquiz_question_id());
-        contentValues.put(QUIZ_USER_ANSWER_ID, m.getquiz_user_answer_id());
-
-        db.insert(TABLE_QUIZ_USER_ANSWER, null, contentValues);
-
-        db.close();
-    }
-   //z
-    public void insertn(QuizQuestionOption n) {
-        db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(QUIZ_QUESTION_OPTION_ID, n.getquiz_question_option_id());
-        contentValues.put(QUIZ_QUESTION_ID,n.getquiz_question_id());
-        contentValues.put(QUIZ_OUESTION_OPTION_TEXT, n.getquiz_question_option_text());
-        contentValues.put(QUIZ_OUESTION_OPTION_IS_CORRECT, n.getquiz_question_option_is_correct());
-        db.insert(TABLE_QUIZ_QUESTION_OPTION, null, contentValues);
-
-        db.close();
-    }
-    public void insertq(Quiz q) {
-        db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(QUIZ_ID, q.getQuizID());
-        contentValues.put(QUIZ_TITLE,q.getQuizTITLE());
-        contentValues.put(QUIZ_TIME, q.getQuizTIME());
-        db.insert(TABLE_Quiz, null, contentValues);
-
-        db.close();
-    }
-    public void insertr(QuizQuestion r) {
-        db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(QUIZ_ID,r.getQuizID());
-        contentValues.put(QUIZ_QUESTION_ID,r.getQuizquestionID());
-        contentValues.put(QUIZ_QUESTION_TEXT,r.getQuizquestionText());
-        contentValues.put(QUIZ_QUESTION_MARKS,r.getQuizqusetionMarks());
-        db.insert(TABLE_Quiz_question, null, contentValues);
-
-        db.close();
-    }
-
-
-
-    public QuizScorecard findProduct(int user) {
-
-
-
-       String query = "Select * FROM " + TABLE_QUIZ_SCORECARD + " WHERE " + QUIZ_SCORECARD_ID+ " =  \"" + user + "\"";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        QuizScorecard u = new QuizScorecard();
-
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            u.setquiz_scorecard_id(cursor.getInt(0));
-            u.setquiz_user_answer_id(cursor.getInt(2));
-            u.setquiz_totalmarks(cursor.getInt(3));
-            u.setuser_id(cursor.getInt(1));
-
-            cursor.close();
-        } else {
-            u= null;
         }
-        db.close();
-        return u;
+
+        if (oldVersion >= newVersion)
+            return;
     }
-    public QuizUserAnswer findProductm(int user) {
-        String query = "Select * FROM " + TABLE_QUIZ_USER_ANSWER + " WHERE " + QUIZ_USER_ANSWER_ID+ " =  \"" + user + "\"";
+
+    // Add your public helper methods to access and get content from the database.
+    // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
+    // to you to create adapters for your views.
+    public void insertcat(Categories q) {
+        db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("_id", q.getId());
+        contentValues.put("name", q.getName());
+        db.insert(CATEGORIES_TABLE_NAME, null, contentValues);
+
+        db.close();
+    }
+
+    //getContact()
+    // Getting single contact
+    public Categories getcat(int user) {
+
+        String query = "Select * FROM " + CATEGORIES_TABLE_NAME + " WHERE " + "_id" + " =  \"" + user + "\"";
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery(query, null);
 
-        QuizUserAnswer m =new QuizUserAnswer();
+        Categories q = new Categories();
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            m.setquiz_question_id(cursor.getInt(1));
-            m.setquiz_user_answer_id(cursor.getInt(0));
-            m.setquiz_question_option_id(cursor.getInt(2));
-           // u.setuser_id(cursor.getInt(1));
-
-            cursor.close();
-        } else {
-            m= null;
-        }
-        db.close();
-        return m;
-    }
-    public QuizQuestionOption findProductn(int user) {
-        String query = "Select * FROM " + TABLE_QUIZ_QUESTION_OPTION + " WHERE " + QUIZ_QUESTION_OPTION_ID + " =  \"" + user + "\"";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        QuizQuestionOption n = new QuizQuestionOption();
-
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            n.setquiz_question_option_id(cursor.getInt(0));
-            n.setquiz_question_id(cursor.getInt(1));
-            n.setquiz_question_option_text(cursor.getString(2));
-            n.setquiz_question_option_is_correct(cursor.getString(3));
-            // u.setuser_id(cursor.getInt(1))
-
-            cursor.close();
-        } else {
-            n = null;
-        }
-        db.close();
-        return n;
-
-
-    }
-    public Quiz findProductq(int user) {
-
-     String query = "Select * FROM "  +TABLE_Quiz+ " WHERE " + QUIZ_ID + " =  \"" + user + "\"";
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        Quiz q = new Quiz();
-
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            q.setQuizID(cursor.getInt(0));
-            q.setQuizTIME(cursor.getInt(2));
-            q.setQuizTITLE(cursor.getString(1));
+            q.setId(cursor.getInt(0));
+            // q.setQuiz_time(cursor.getInt(2));
+            q.setName(cursor.getString(1));
 
 
             // u.setuser_id(cursor.getInt(1))
@@ -283,35 +369,82 @@ SQLiteDatabase db;
 
 
     }
-    public QuizQuestion findProductr(int user) {
-        String query = "Select * FROM " + TABLE_Quiz_question+ " WHERE " + QUIZ_QUESTION_ID+ " =  \"" + user + "\"";
 
+    // updateContact()
+    // Updating single contact
+    public int updateCat(Categories q) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery(query, null);
+        ContentValues values = new ContentValues();
+        values.put("name", q.getName());
+        values.put("_id", q.getId());
 
-        QuizQuestion r = new QuizQuestion();
-
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            r.setQuizID(cursor.getInt(1));
-            r.setQuizquestionID(cursor.getInt(0));
-            r.setQuizquestionText(cursor.getString(2));
-            r.setQuizqusetionMarks(cursor.getInt(3));
-
-            // u.setuser_id(cursor.getInt(1))
-
-            cursor.close();
-        } else {
-            r= null;
-        }
-        db.close();
-        return r;
-
-
+        // updating row
+        return db.update(CATEGORIES_TABLE_NAME, values, "_id" + " = ?",
+                new String[]{String.valueOf(q.getId())});
     }
 
 
+    //deleteContact()
+    // Deleting single contact
+    public void deleteCat(Categories q) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(CATEGORIES_TABLE_NAME, "_id" + " = ?",
+                new String[]{String.valueOf(q.getId())});
+
+    }
+
+    public ArrayList<Categories> getAlldata() {
+        ArrayList<Categories> categories = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = {"_id","name"};
+        Cursor cursor = db.query(CATEGORIES_TABLE_NAME, columns, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                Categories cat = new Categories();
+                //each step is a 2 part process, find the index of the column first, find the data of that column using
+                //that index and finally set our blank Games object to contain our data
+                cat.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+
+                cat.setName(cursor.getString(cursor.getColumnIndex("name")));
 
 
+
+
+                categories.add(cat);
+            } while (cursor.moveToNext());
+        }
+        return categories;
+    }
+
+    public ArrayList<Questions> getAllquestion() {
+        ArrayList<Questions> questionsArrayList = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = {"_id","header","content","image_file","answer_text","image_file_ans","year","name","t_id"};
+        Cursor cursor = db.query(QUESTIONS_TABLE_NAME, columns, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                Questions questions = new Questions();
+                //each step is a 2 part process, find the index of the column first, find the data of that column using
+                //that index and finally set our blank Games object to contain our data
+                questions.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+                questions.setHeader(cursor.getString(cursor.getColumnIndex("header")));
+                questions.setContent(cursor.getString(cursor.getColumnIndex("content")));
+               // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+               // questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+               // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+               // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+              //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+               // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+
+
+
+
+                questionsArrayList.add(questions);
+            } while (cursor.moveToNext());
+        }
+        return questionsArrayList;
+    }
 }

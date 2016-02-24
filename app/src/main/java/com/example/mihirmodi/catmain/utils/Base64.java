@@ -568,7 +568,7 @@ public class Base64 {
     public static String encodeBytes( byte[] source ) {
         // Since we're not going to have the GZIP encoding turned on,
         // we're not going to have an java.io.IOException thrown, so
-        // we should not force the User to have to catch it.
+        // we should not force the Users to have to catch it.
         String encoded = null;
         try {
             encoded = encodeBytes(source, 0, source.length, NO_OPTIONS);
@@ -635,7 +635,7 @@ public class Base64 {
     public static String encodeBytes( byte[] source, int off, int len ) {
         // Since we're not going to have the GZIP encoding turned on,
         // we're not going to have an java.io.IOException thrown, so
-        // we should not force the User to have to catch it.
+        // we should not force the Users to have to catch it.
         String encoded = null;
         try {
             encoded = encodeBytes( source, off, len, NO_OPTIONS );

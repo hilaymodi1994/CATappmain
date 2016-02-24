@@ -65,7 +65,7 @@ public class SignupScreen extends AppCompatActivity {
             public void success(JsonObject jsonObject, Response response) {
 
                 Log.d("SignupScreen", "response:" + jsonObject);
-                if (jsonObject.has("msg")&& jsonObject.get("msg").getAsString().equals("User registered succesfully")) {
+                if (jsonObject.has("msg")&& jsonObject.get("msg").getAsString().equals("Users registered succesfully")) {
                     toast.setText("SignupScreen done");
                     toast.show();
                     Intent intent = new Intent(SignupScreen.this, HomeScreen.class);
@@ -96,7 +96,7 @@ public class SignupScreen extends AppCompatActivity {
 
         boolean result = true;
         if (user.getText().toString().trim().length() <= 5) {
-            user.setError("invald User name");
+            user.setError("invald Users name");
             result = false;
         }
 

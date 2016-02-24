@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.mihirmodi.catmain.adapters.DrawerListAdapter;
+import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.DrawerItem;
 import com.example.mihirmodi.catmain.R;
 
@@ -112,14 +113,14 @@ public class HomeScreen extends AppCompatActivity {
 
     public void Data(View v)
     {
-        Intent intent=new Intent(this,DatabasePracScreen.class);
+        Intent intent=new Intent(this,CategoriesListmain.class);
         startActivity(intent);
     }
-  /*  public void paper(View v)
+    public void paper(View v)
     {
-        Intent intent=new Intent(this,Quizselection.class);
+        Intent intent=new Intent(this,QuizPlayer.class);
         startActivity(intent);
-    }*/
+    }
     private void selectItemFromDrawer(int position) {
 
         Intent intent;
