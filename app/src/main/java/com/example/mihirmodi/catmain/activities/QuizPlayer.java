@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.WindowManager;
 
 import com.example.mihirmodi.catmain.adapters.AdapterIntroductionScreen;
 import com.example.mihirmodi.catmain.adapters.AdapterQuestins;
@@ -32,10 +33,11 @@ public class QuizPlayer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_quiz_player);
         viewPager = (ViewPager) findViewById(R.id.pagerquizplayer);
-        PagerAdapter pagerAdapter = new QuizplayerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+       // PagerAdapter pagerAdapter = new QuizplayerAdapter(getSupportFragmentManager());
+        //viewPager.setAdapter(pagerAdapter);
 
     }
 }

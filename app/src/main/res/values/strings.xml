@@ -68,4 +68,5 @@ For Academic queries like eligibility,category and PWD certificate (Monday to Fr
     <string name="title_activity_questions">Questions</string>
     <string name="title_activity_questions_main">QuestionsMain</string>
     <string name="title_activity_quiz_player">QuizPlayer</string>
+    <string name="title_activity_testsmain">Testsmain</string>
 </resources>

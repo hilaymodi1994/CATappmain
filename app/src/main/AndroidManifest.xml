@@ -23,7 +23,9 @@
             android:value="@string/app_id" />
 
         <activity
+
             android:name=".activities.SplashScreen"
+            android:noHistory="true"
             android:label="@string/title_activity_splash"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -36,6 +38,7 @@
         <activity
             android:name=".activities.IntroductionScreen"
             android:label="@string/app_name"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -55,6 +58,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.LoginScreen"
+            android:noHistory="true"
             android:label="@string/title_activity_login1"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -150,6 +154,10 @@
         <activity
             android:name=".activities.QuizPlayer"
             android:label="@string/title_activity_quiz_player"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.Testsmain"
+            android:label="@string/title_activity_testsmain"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

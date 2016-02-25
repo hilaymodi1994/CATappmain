@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/pager"
-    android:background="@color/google_deepPurple_500"
+    android:background="@drawable/back3"
     android:padding="10dp"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
@@ -18,9 +18,12 @@
         android:id="@+id/e1"
         android:layout_height="wrap_content"
         android:hint=" email"
-        android:textSize="30dp"
-        android:background="@color/google_deepPurple_200"
-        android:drawableLeft="@drawable/lo11"
+        android:textColorHint="#fff"
+        android:textSize="25sp"
+       android:lineSpacingExtra="2dp"
+        android:lineSpacingMultiplier="2"
+        android:background="@drawable/back"
+
         android:textColor="#Fff"
         android:layout_marginTop="248dp"
         android:layout_alignParentTop="true"
@@ -30,12 +33,13 @@
         android:layout_alignParentEnd="true" />
     <EditText
         android:id="@+id/e2"
-        android:drawableLeft="@drawable/lo12"
+        android:textColorHint="#fff"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint=" user name"
-        android:textSize="30dp"
-        android:background="@color/google_deepPurple_200"
+
+        android:background="@drawable/back"
         android:textColor="#Fff"
         android:layout_below="@+id/e1"
         android:layout_marginTop="7dp"
@@ -45,12 +49,13 @@
         android:layout_alignRight="@+id/e1"
         android:layout_alignEnd="@+id/e1" />
     <EditText
-        android:drawableLeft="@drawable/lo13"
+        android:textColorHint="#fff"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="  password"
-        android:textSize="30dp"
-        android:background="@color/google_deepPurple_200"
+        android:hint=" password"
+
+        android:background="@drawable/back"
         android:textColor="#Fff"
         android:layout_below="@+id/e2"
         android:layout_marginTop="10dp"
@@ -66,7 +71,8 @@
         android:layout_height="wrap_content"
         android:text="signup"
         android:textSize="30dp"
-        android:background="@color/google_deepPurple_300"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:onClick="signup"
         android:textColor="#Fff"
         android:textAlignment="center"
@@ -75,15 +81,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="36dp"
         android:layout_alignRight="@+id/e3"
-        android:layout_alignEnd="@+id/e3" />
-           <ImageButton
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@drawable/lo14"
-               android:layout_below="@+id/b1"
-               android:tint="@color/google_deepPurple_200"
-               android:layout_alignParentLeft="true"
-               android:onClick="back"/>
+        android:layout_alignEnd="@+id/e3"
+        android:background="@drawable/back2"/>
+
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

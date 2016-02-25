@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.WindowManager;
 
 import com.example.mihirmodi.catmain.models.DocumentPdfModel;
 import com.example.mihirmodi.catmain.adapters.AdapterDocument;
@@ -18,6 +19,7 @@ public class ImportantDocument extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.importantdoc);
 
         assignView();

@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.Questions;
+import com.example.mihirmodi.catmain.models.Tests;
 import com.example.mihirmodi.catmain.viewholders.CategoriesViewHolder;
 
 import java.io.File;
@@ -432,12 +433,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 questions.setId(cursor.getInt(cursor.getColumnIndex("_id")));
                 questions.setHeader(cursor.getString(cursor.getColumnIndex("header")));
                 questions.setContent(cursor.getString(cursor.getColumnIndex("content")));
-               // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
-               // questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
-               // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
-               // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
-              //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
-               // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+               questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+               questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+               questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+               questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+              questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
 
 
 
@@ -446,5 +447,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return questionsArrayList;
+    }
+    public ArrayList<Tests> getAlltests() {
+        ArrayList<Tests> testses = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = {"_id","name","allowed_time"};
+        Cursor cursor = db.query(TESTS_TABLE_NAME, columns, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                Tests tests = new Tests();
+                //each step is a 2 part process, find the index of the column first, find the data of that column using
+                //that index and finally set our blank Games object to contain our data
+                tests.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+
+                tests.setName(cursor.getString(cursor.getColumnIndex("name")));
+                tests.setAllowedTime(cursor.getInt(cursor.getColumnIndex("allowed_time")));
+
+
+
+
+                testses.add(tests);
+            } while (cursor.moveToNext());
+        }
+        return testses;
     }
 }

@@ -5,11 +5,17 @@
     android:background="@color/google_deepPurple_500"
 
     >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back3">
+
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
         android:onClick="login"
-        android:background="@color/google_deepPurple_300"
+        android:background="@drawable/back2"
         android:textColor="#fff"
         android:textSize="35dp"
         android:textAlignment="center"
@@ -17,15 +23,18 @@
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:text="Login"
-
+android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <android.support.v7.widget.AppCompatButton
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:id="@+id/btn_signup"
         android:layout_width="fill_parent"
         android:onClick="signup"
-        android:background="@color/google_deepPurple_300"
+        android:background="@drawable/back2"
         android:textColor="#fff"
         android:textSize="35dp"
         android:textAlignment="center"
@@ -39,6 +48,7 @@
         android:layout_marginTop="59dp" />
 
     <ImageView
+        android:background="@drawable/back"
         android:src="@drawable/lo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,4 +58,5 @@
         android:layout_marginTop="93dp" />
 
 
+</RelativeLayout>
 </RelativeLayout>

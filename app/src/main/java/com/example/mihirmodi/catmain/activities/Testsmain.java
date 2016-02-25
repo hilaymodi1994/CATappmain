@@ -1,47 +1,49 @@
 package com.example.mihirmodi.catmain.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.WindowManager;
 
-import com.example.mihirmodi.catmain.adapters.AdapterQuestins;
-import com.example.mihirmodi.catmain.adapters.CategoriesAdapter;
-import com.example.mihirmodi.catmain.models.Categories;
-import com.example.mihirmodi.catmain.models.Institute;
-import com.example.mihirmodi.catmain.adapters.AdapterInstitute;
 import com.example.mihirmodi.catmain.R;
-import com.example.mihirmodi.catmain.models.Questions;
+import com.example.mihirmodi.catmain.adapters.CategoriesAdapter;
+import com.example.mihirmodi.catmain.adapters.TestsMainAdapter;
+import com.example.mihirmodi.catmain.models.Categories;
+import com.example.mihirmodi.catmain.models.Tests;
 import com.example.mihirmodi.catmain.utils.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
-public class QuestionsMain extends AppCompatActivity {
+public class Testsmain extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    AdapterQuestins adapter;
+    TestsMainAdapter adapter;
     DatabaseHelper db=new DatabaseHelper(this);
-    ArrayList<Questions>questionsArrayList;
+    ArrayList<Tests> testses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_questions_main);
+        setContentView(R.layout.activity_testsmain);
 
         assignView();
         //setup adapter
         setalldata();
 
+
         setupRecyclerView();
         setupAdapter();
     }
 
-    private void setalldata() {
-        questionsArrayList=db.getAllquestion();
+    private void setalldata (){
+        testses=db.getAlltests();
     }
 
 
@@ -49,15 +51,12 @@ public class QuestionsMain extends AppCompatActivity {
 
 
     private void setupAdapter() {
-        adapter=new AdapterQuestins(this, questionsArrayList);
+        adapter=new TestsMainAdapter(this, testses);
         recyclerView.setAdapter(adapter);
     }
 
     private void setupRecyclerView() {
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void assignView() {
@@ -66,4 +65,3 @@ public class QuestionsMain extends AppCompatActivity {
 
 
 }
-

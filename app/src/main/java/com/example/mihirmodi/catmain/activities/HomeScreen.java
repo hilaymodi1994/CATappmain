@@ -1,5 +1,6 @@
 package com.example.mihirmodi.catmain.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -11,6 +12,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,7 +26,6 @@ import com.example.mihirmodi.catmain.R;
 import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
-
 
         private static String TAG = IntroductionScreen.class.getSimpleName();
     ViewPager viewPager1;
@@ -40,8 +41,9 @@ public class HomeScreen extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.homescreen);
-            viewPager1= (ViewPager) findViewById(R.id.pager1);
+           // viewPager1= (ViewPager) findViewById(R.id.pager1);
             imageView_drawerToggle=(ImageView)findViewById(R.id.iv_drawerToggle);
 
             mNavItems.add(new DrawerItem("What is CAT?", "", R.drawable.ic_info_black_24dp));
@@ -111,14 +113,20 @@ public class HomeScreen extends AppCompatActivity {
     }
 
 
-    public void Data(View v)
+
+    public void practise(View v)
     {
         Intent intent=new Intent(this,CategoriesListmain.class);
         startActivity(intent);
     }
-    public void paper(View v)
+    public void solution(View v)
     {
         Intent intent=new Intent(this,QuizPlayer.class);
+        startActivity(intent);
+    }
+    public void quicktest(View v)
+    {
+        Intent intent=new Intent(this,Testsmain.class);
         startActivity(intent);
     }
     private void selectItemFromDrawer(int position) {
