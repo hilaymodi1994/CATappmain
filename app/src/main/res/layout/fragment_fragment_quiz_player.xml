@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     >
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_top"
+        android:id="@+id/toolbar"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
@@ -22,12 +22,16 @@
 
     </android.support.v7.widget.Toolbar>
 
-
-    <android.support.v7.widget.RecyclerView
+    //note: we want to scroll pages, so we need viewpager here
+    <!--<android.support.v7.widget.RecyclerView
         android:layout_below="@+id/toolbar_top"
         android:id="@+id/recycler_view1"
         android:background="@color/google_deepPurple_500"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true" />-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 </RelativeLayout>

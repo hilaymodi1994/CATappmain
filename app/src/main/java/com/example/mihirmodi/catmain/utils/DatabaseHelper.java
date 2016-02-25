@@ -11,8 +11,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.example.mihirmodi.catmain.models.Categories;
-import com.example.mihirmodi.catmain.models.Questions;
-import com.example.mihirmodi.catmain.viewholders.CategoriesViewHolder;
+import com.example.mihirmodi.catmain.models.Question;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -418,15 +417,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return categories;
     }
 
-    public ArrayList<Questions> getAllquestion() {
-        ArrayList<Questions> questionsArrayList = new ArrayList<>();
+    public ArrayList<Question> getAllquestion() {
+        ArrayList<Question> questionsArrayList = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"_id","header","content","image_file","answer_text","image_file_ans","year","name","t_id"};
         Cursor cursor = db.query(QUESTIONS_TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 //create a new Games object and retrieve the data from the cursor to be stored in this Games object
-                Questions questions = new Questions();
+                Question questions = new Question();
                 //each step is a 2 part process, find the index of the column first, find the data of that column using
                 //that index and finally set our blank Games object to contain our data
                 questions.setId(cursor.getInt(cursor.getColumnIndex("_id")));
