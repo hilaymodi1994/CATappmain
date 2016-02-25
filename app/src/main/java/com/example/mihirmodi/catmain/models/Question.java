@@ -1,6 +1,6 @@
 package com.example.mihirmodi.catmain.models;
 
-public class Questions {
+public class Question {
     private int id;
     private String header;
     private String content;
@@ -20,7 +20,7 @@ public class Questions {
         this.marked = marked;
     }
 
-    public Questions() {
+    public Question() {
         this.attempted = 0;
     }
 
