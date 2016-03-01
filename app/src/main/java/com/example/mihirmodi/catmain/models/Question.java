@@ -1,5 +1,7 @@
 package com.example.mihirmodi.catmain.models;
 
+import java.util.List;
+
 public class Question {
     private int id;
     private String header;
@@ -11,6 +13,7 @@ public class Question {
     private String name;
     private int attempted; //this attribute does not belong to database.used as a flag in question details activity for setting the spinner view.
     private boolean marked;
+    private List<Options> optionsList;
 
     public boolean isMarked() {
         return marked;
@@ -104,5 +107,13 @@ public class Question {
 
     public void setTid(int tid) {
         this.tid = tid;
+    }
+
+    public List<Options> getOptionsList() {
+        return optionsList;
+    }
+
+    public void setOptionsList(List<Options> optionsList) {
+        this.optionsList = optionsList;
     }
 }

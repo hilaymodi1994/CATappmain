@@ -28,7 +28,7 @@ public class QuizPlayer extends AppCompatActivity {
         setContentView(R.layout.activity_quiz_player);
         viewPager = (ViewPager) findViewById(R.id.pagerquizplayer);
         db = new DatabaseHelper(getApplicationContext());
-        questions=db.getAllquestion();
+        questions=db.getAllQuestionsFilledWithOptions();
         pagerAdapter=new QuizPlayerPagerAdapter(this,getSupportFragmentManager(),questions);
         viewPager.setAdapter(pagerAdapter);
         setToLaunchPosition();

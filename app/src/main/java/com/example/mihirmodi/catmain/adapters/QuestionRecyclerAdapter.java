@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.models.IWRecyclerItem;
+import com.example.mihirmodi.catmain.models.Options;
 import com.example.mihirmodi.catmain.models.Question;
+import com.example.mihirmodi.catmain.viewholders.OptionViewHolder;
 import com.example.mihirmodi.catmain.viewholders.QuestionHeaderViewHolder;
 
 import java.util.List;
@@ -38,6 +40,10 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 rootView = inflater.inflate(R.layout.layoutquestionheadertext, parent, false);
                 QuestionHeaderViewHolder questionHeaderViewHolder = new QuestionHeaderViewHolder(rootView, mContext);
                 return questionHeaderViewHolder;
+            case TYPE_OPTION:
+                rootView = inflater.inflate(R.layout.layout_option, parent, false);
+                OptionViewHolder optionViewHolder = new OptionViewHolder(rootView);
+                return optionViewHolder;
         }
         return null;
     }
@@ -48,6 +54,10 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             case TYPE_HEADER:
                 QuestionHeaderViewHolder view = (QuestionHeaderViewHolder) holder;
                 view.bindQuestionHeaderText((Question) recyclerItems.get(position).getItem());
+                break;
+            case TYPE_OPTION:
+                OptionViewHolder optionViewHolder=(OptionViewHolder)holder;
+                optionViewHolder.bindOption((Options)recyclerItems.get(position).getItem());
                 break;
         }
 

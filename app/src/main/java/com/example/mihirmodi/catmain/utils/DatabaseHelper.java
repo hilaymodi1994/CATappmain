@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.example.mihirmodi.catmain.models.Categories;
+import com.example.mihirmodi.catmain.models.Options;
 import com.example.mihirmodi.catmain.models.Question;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
@@ -417,7 +419,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return categories;
     }
 
-    public ArrayList<Question> getAllquestion() {
+    /**
+     *
+     * @return list of questions with out options in it
+     */
+    private ArrayList<Question> getAllquestion() {
         ArrayList<Question> questionsArrayList = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"_id","header","content","image_file","answer_text","image_file_ans","year","name","t_id"};
@@ -437,13 +443,65 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
               //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
                // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
-
-
-
-
                 questionsArrayList.add(questions);
             } while (cursor.moveToNext());
         }
         return questionsArrayList;
+    }
+
+    /**
+     * List of question having options inside it...
+     * @return
+     */
+    public ArrayList<Question> getAllQuestionsFilledWithOptions(){
+        ArrayList<Question> questions=getAllquestion();
+        for(Question question:questions){
+            List<Options> options=getOptionsForSingleQuestion(question.getId());
+            question.setOptionsList(options);
+        }
+        return questions;
+    }
+
+    public List<Options> getOptionsForSingleQuestion(int questionID){
+        List<Options> options = new ArrayList();
+        db=getReadableDatabase();
+        Cursor  cursor= db.rawQuery("SELECT * FROM "
+                + OPTIONS_TABLE_NAME + " WHERE " + "q_id" + "= '" + questionID + "'", null);
+        try {
+            if (cursor.moveToFirst()) {
+
+                for (int i = 0; i < cursor.getCount(); i++) {
+
+
+                    do {
+                        //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                        Options option = new Options();
+
+                        //each step is a 2 part process, find the index of the column first, find the data of that column using
+                        //that index and finally set our blank Games object to contain our data
+                        option.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+
+                        option.setContent(cursor.getString(cursor.getColumnIndex("content")));
+                        option.setQid(cursor.getInt(cursor.getColumnIndex("q_id")));
+
+
+                        // options.setCorrect(cursor.getString.(booleanColumnIndex)));
+                        // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+                        // questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+                        // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+                        // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+                        //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                        // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+                        options.add(option);
+                    } while (cursor.moveToNext());
+                }
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            cursor.close();
+            db.close();
+        }
+        return options;
     }
 }

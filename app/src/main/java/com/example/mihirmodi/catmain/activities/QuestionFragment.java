@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.adapters.QuestionRecyclerAdapter;
 import com.example.mihirmodi.catmain.models.IWRecyclerItem;
+import com.example.mihirmodi.catmain.models.Options;
 import com.example.mihirmodi.catmain.models.Question;
 
 import java.util.ArrayList;
@@ -56,8 +57,13 @@ public class QuestionFragment extends Fragment {
     }
 
     private void loadQuestion() {
-        recyclerItems.add(new IWRecyclerItem(IWRecyclerItem.TYPE.QUESTION_HEADER,question));
-        recyclerAdapter.notifyItemInserted(1);
+        recyclerItems.add(new IWRecyclerItem(IWRecyclerItem.TYPE.QUESTION_HEADER, question));
+        recyclerAdapter.notifyItemInserted(recyclerItems.size()-1);
+        for(Options options:question.getOptionsList()){
+            recyclerItems.add(new IWRecyclerItem(IWRecyclerItem.TYPE.QUESTION_OPTION, options));
+            recyclerAdapter.notifyItemInserted(recyclerItems.size()-1);
+        }
+
     }
 
     private void prepareRecyclerViewAndAdapter() {

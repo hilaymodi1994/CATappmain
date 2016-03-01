@@ -33,7 +33,7 @@ public class QuestionsMain extends AppCompatActivity {
     }
 
     private void setalldata() {
-        questionsArrayList=db.getAllquestion();
+        questionsArrayList=db.getAllQuestionsFilledWithOptions();
     }
 
     private void setupAdapter() {
