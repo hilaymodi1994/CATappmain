@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.WindowManager;
 
 import com.example.mihirmodi.catmain.adapters.CategoriesAdapter;
-import com.example.mihirmodi.catmain.models.Categories;
+import com.example.mihirmodi.catmain.models.Category;
 import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.utils.DatabaseHelper;
 
@@ -20,7 +20,7 @@ public class CategoriesListmain extends AppCompatActivity {
     RecyclerView recyclerView;
     CategoriesAdapter adapter;
     DatabaseHelper db=new DatabaseHelper(this);
-    ArrayList<Categories>categories;
+    ArrayList<Category>categories;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +30,12 @@ public class CategoriesListmain extends AppCompatActivity {
         assignView();
         //setup adapter
         setalldata();
-        Collections.sort(categories, new Comparator<Categories>() {
+        Collections.sort(categories, new Comparator<Category>() {
 
     /* This comparator will sort AppDetail objects alphabetically. */
 
             @Override
-            public int compare(Categories c1, Categories c2) {
+            public int compare(Category c1, Category c2) {
 
                 // String implements Comparable
                 return (c1.getName().toString()).compareTo(c2.getName().toString());

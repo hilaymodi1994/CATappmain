@@ -14,4 +14,7 @@
     <color name="google_deepPurple_700">#512DA8</color>
     <color name="google_deepPurple_800">#4527A0</color>
     <color name="google_deepPurple_900">#311B92</color>
+
+    <color name="red">#d50000</color>
+    <color name="green">#558b2f</color>
 </resources>

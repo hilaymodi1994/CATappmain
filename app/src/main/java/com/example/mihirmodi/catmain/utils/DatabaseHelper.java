@@ -10,13 +10,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.mihirmodi.catmain.models.Categories;
-import com.example.mihirmodi.catmain.models.Options;
+import com.example.mihirmodi.catmain.models.Category;
+import com.example.mihirmodi.catmain.models.Option;
 import com.example.mihirmodi.catmain.models.Question;
-import com.example.mihirmodi.catmain.models.QuestionCategories;
 import com.example.mihirmodi.catmain.models.Tests;
-
-import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -322,7 +319,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         oldversion = oldVersion;
         if (oldVersion == 1) {
             // copyTestLogo();
-            copyImageFiles();
+            try {
+                copyImageFiles();
+            }catch (Exception ex){
+                ex.printStackTrace();
+                Log.e("CopyFile exception","Most probably, image files not found.");
+            }
             // copyExtraFiles();
 
         }
@@ -334,7 +336,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Add your public helper methods to access and get content from the database.
     // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
     // to you to create adapters for your views.
-    public void insertcat(Categories q) {
+    public void insertcat(Category q) {
         db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("_id", q.getId());
@@ -346,7 +348,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //getContact()
     // Getting single contact
-    public Categories getcat(int user) {
+    public Category getcat(int user) {
 
         String query = "Select * FROM " + CATEGORIES_TABLE_NAME + " WHERE " + "_id" + " =  \"" + user + "\"";
 
@@ -354,7 +356,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        Categories q = new Categories();
+        Category q = new Category();
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
@@ -377,7 +379,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // updateContact()
     // Updating single contact
-    public int updateCat(Categories q) {
+    public int updateCat(Category q) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -392,22 +394,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //deleteContact()
     // Deleting single contact
-    public void deleteCat(Categories q) {
+    public void deleteCat(Category q) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(CATEGORIES_TABLE_NAME, "_id" + " = ?",
                 new String[]{String.valueOf(q.getId())});
 
     }
 
-    public ArrayList<Categories> getAlldata() {
-        ArrayList<Categories> categories = new ArrayList<>();
+    public ArrayList<Category> getAlldata() {
+        ArrayList<Category> categories = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
         String[] columns = {"_id", "name"};
         Cursor cursor = db.query(CATEGORIES_TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 //create a new Games object and retrieve the data from the cursor to be stored in this Games object
-                Categories cat = new Categories();
+                Category cat = new Category();
                 //each step is a 2 part process, find the index of the column first, find the data of that column using
                 //that index and finally set our blank Games object to contain our data
                 cat.setId(cursor.getInt(cursor.getColumnIndex("_id")));
@@ -474,8 +476,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return questionsArrayList;
     }
 
-    /*   public ArrayList<Options> getAllOptions() {
-           ArrayList<Options> OptionArrayList = new ArrayList<>();
+    /*   public ArrayList<Option> getAllOptions() {
+           ArrayList<Option> OptionArrayList = new ArrayList<>();
            SQLiteDatabase db = getWritableDatabase();
            String[] columns = {"_id", "content", "q_id", "correct"};
            Cursor cursor = db.query(OPTIONS_TABLE_NAME, columns, null, null, null, null, null);
@@ -484,7 +486,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
            if (cursor != null && cursor.moveToFirst()) {
                do {
                    //create a new Games object and retrieve the data from the cursor to be stored in this Games object
-                   Options options = new Options();
+                   Option options = new Option();
 
                    //each step is a 2 part process, find the index of the column first, find the data of that column using
                    //that index and finally set our blank Games object to contain our data
@@ -512,14 +514,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                public ArrayList<Question> getAllQuestionsFilledWithOptions() {
                 ArrayList<Question> questions = getAllquestion();
                 for (Question question : questions) {
-                    List<Options> options = getOptionsForSingleQuestion(question.getId());
-                    question.setOptionsList(options);
+                    List<Option> options = getOptionsForSingleQuestion(question.getId());
+                    question.setOptionList(options);
                 }
                 return questions;
             }
 
-            public List<Options> getOptionsForSingleQuestion(int questionID) {
-                List<Options> options = new ArrayList();
+            public List<Option> getOptionsForSingleQuestion(int questionID) {
+                List<Option> options = new ArrayList();
                 db = getReadableDatabase();
                 Cursor cursor = db.rawQuery("SELECT * FROM "
                         + OPTIONS_TABLE_NAME + " WHERE " + "q_id" + "= '" + questionID + "'", null);
@@ -531,7 +533,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                             do {
                                 //create a new Games object and retrieve the data from the cursor to be stored in this Games object
-                                Options option = new Options();
+                                Option option = new Option();
 
                                 //each step is a 2 part process, find the index of the column first, find the data of that column using
                                 //that index and finally set our blank Games object to contain our data
@@ -590,8 +592,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 } while (cursor.moveToNext());
             }
                 for (Question question : questionsArrayList) {
-                    List<Options> options = getOptionsForSingleQuestion(question.getId());
-                    question.setOptionsList(options);
+                    List<Option> options = getOptionsForSingleQuestion(question.getId());
+                    question.setOptionList(options);
                 }
 
             return questionsArrayList;
@@ -622,8 +624,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         for (Question question : questionsArrayList) {
-            List<Options> options = getOptionsForSingleQuestion(question.getId());
-            question.setOptionsList(options);
+            List<Option> options = getOptionsForSingleQuestion(question.getId());
+            question.setOptionList(options);
         }
 
         return questionsArrayList;

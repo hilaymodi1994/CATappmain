@@ -10,9 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.mihirmodi.catmain.R;
-import com.example.mihirmodi.catmain.activities.QuestionsMain;
 import com.example.mihirmodi.catmain.activities.TestRules;
-import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.IimImageView;
 import com.example.mihirmodi.catmain.models.Tests;
 

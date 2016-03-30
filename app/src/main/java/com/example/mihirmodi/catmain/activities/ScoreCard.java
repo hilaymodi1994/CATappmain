@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.example.mihirmodi.catmain.R;
 
+import java.text.DecimalFormat;
+
 public class ScoreCard extends AppCompatActivity {
-int Score;
+float score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,11 +22,10 @@ int Score;
         setContentView(R.layout.activity_score_card);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Score= getIntent().getExtras().getInt("phn");
+        score= getIntent().getExtras().getFloat("score");
        TextView text=(TextView)findViewById(R.id.textview_solution);
-        text.setText(Score);
-
-
+        DecimalFormat df=new DecimalFormat();
+        df.setMaximumFractionDigits(2);
+        text.setText(df.format(score));
     }
-
 }

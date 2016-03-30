@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
 import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.adapters.QuestionRecyclerAdapter;
 import com.example.mihirmodi.catmain.models.IWRecyclerItem;
-import com.example.mihirmodi.catmain.models.Options;
+import com.example.mihirmodi.catmain.models.Option;
 import com.example.mihirmodi.catmain.models.Question;
 
 import java.util.ArrayList;
@@ -24,11 +23,12 @@ import java.util.List;
  */
 public class QuestionFragment extends Fragment {
     int flag;
-    int Score;
     RecyclerView recyclerView;
     Question question;
     QuestionRecyclerAdapter recyclerAdapter;
     List<IWRecyclerItem> recyclerItems;
+    private QuizPlayer quizPlayer;
+
     public QuestionFragment() {
         // Required empty public constructor
     }
@@ -40,10 +40,7 @@ public class QuestionFragment extends Fragment {
     public void setQuestion(Question question) {
         this.question = question;
     }
-public int getFlag(){return  Score;}
     public void setFlag(int flag){this.flag=flag;}
-    public int getScore(){return Score ;}
-    public void setScore(int Score){this.Score=Score;}
 
 
     @Override
@@ -52,6 +49,15 @@ public int getFlag(){return  Score;}
         View rootView=inflater.inflate(R.layout.fragment_question, container, false);
         recyclerView=(RecyclerView)rootView.findViewById(R.id.recyclerView);
         return rootView;
+    }
+
+    public void disableAllOptions(){
+        for(IWRecyclerItem recyclerItem:recyclerItems){
+            if(recyclerItem.getItemType().equals(IWRecyclerItem.TYPE.QUESTION_OPTION)){
+                ((Option)recyclerItem.getItem()).setSelectable(false);
+                recyclerAdapter.notifyItemChanged(recyclerItems.indexOf(recyclerItem));
+            }
+        }
     }
 
     @Override
@@ -66,9 +72,9 @@ public int getFlag(){return  Score;}
 
     private void loadQuestion() {
         recyclerItems.add(new IWRecyclerItem(IWRecyclerItem.TYPE.QUESTION_HEADER, question));
-        recyclerAdapter.notifyItemInserted(recyclerItems.size()-1);
-        for(Options options:question.getOptionsList()){
-            recyclerItems.add(new IWRecyclerItem(IWRecyclerItem.TYPE.QUESTION_OPTION, options));
+        recyclerAdapter.notifyItemInserted(recyclerItems.size() - 1);
+        for(Option option :question.getOptionList()){
+            recyclerItems.add(new IWRecyclerItem(IWRecyclerItem.TYPE.QUESTION_OPTION, option));
             recyclerAdapter.notifyItemInserted(recyclerItems.size()-1);
         }
 
@@ -76,8 +82,16 @@ public int getFlag(){return  Score;}
 
     private void prepareRecyclerViewAndAdapter() {
         recyclerItems=new ArrayList<>();
-        recyclerAdapter=new QuestionRecyclerAdapter(getActivity(),recyclerItems,getFlag(),getScore());
+        recyclerAdapter=new QuestionRecyclerAdapter(getActivity(),quizPlayer,this,recyclerItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(recyclerAdapter);
+    }
+
+    public void setQuizPlayer(QuizPlayer quizPlayer) {
+        this.quizPlayer = quizPlayer;
+    }
+
+    public QuizPlayer getQuizPlayer() {
+        return quizPlayer;
     }
 }

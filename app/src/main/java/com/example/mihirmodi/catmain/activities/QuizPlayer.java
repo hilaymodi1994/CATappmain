@@ -37,6 +37,7 @@ TextView texttimmer;
     int cat_id = 0;
     int test_id = 0;
     int time;
+    float score=0;
     public static String EXTRA_LAUNCH_POSITION="launchPosition";
     ViewPager viewPager;
     List<Question> questions;
@@ -61,7 +62,7 @@ TextView texttimmer;
         if(cat_id != 0){
             questions=db.getQuestionforcategories(cat_id);
             flag=0;
-            pagerAdapter=new QuizPlayerPagerAdapter(this,getSupportFragmentManager(),questions,flag);
+            pagerAdapter=new QuizPlayerPagerAdapter(this,this,getSupportFragmentManager(),questions,flag);
             viewPager.setAdapter(pagerAdapter);
             setToLaunchPosition();
         }
@@ -77,13 +78,13 @@ TextView texttimmer;
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(QuizPlayer.this, ScoreCard.class);
-                  //  Bundle b = new Bundle();
-                  //  b.putInt("phn", Integer.parseInt(Score.toString()));
-                   // intent.putExtras(b);
+                    Bundle b = new Bundle();
+                    b.putFloat("score", score);
+                   intent.putExtras(b);
                     startActivity(intent);
                 }
             });
-            pagerAdapter=new QuizPlayerPagerAdapter(this,getSupportFragmentManager(),questions,flag);
+            pagerAdapter=new QuizPlayerPagerAdapter(this,this,getSupportFragmentManager(),questions,flag);
             viewPager.setAdapter(pagerAdapter);
             setToLaunchPosition();
 
@@ -125,8 +126,11 @@ TextView texttimmer;
             @Override
             public void onFinish() {
                 texttimmer.setText("Submiting your test");
-                Intent i = new Intent(QuizPlayer.this, ScoreCard.class);
-                startActivity(i);
+                Intent intent = new Intent(QuizPlayer.this, ScoreCard.class);
+                Bundle b = new Bundle();
+                b.putFloat("score",score);
+                intent.putExtras(b);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
 
             }
@@ -176,5 +180,13 @@ TextView texttimmer;
                         System.exit(0);
                     }
                 }).setNegativeButton("No", null).show();}
+    }
+
+    public void increaseScore(){
+        score++;
+    }
+
+    public void decreaseScore(){
+        score=score-0.3f;
     }
 }

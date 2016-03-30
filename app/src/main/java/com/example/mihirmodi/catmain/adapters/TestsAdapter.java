@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mihirmodi.catmain.R;
-import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.Tests;
-import com.example.mihirmodi.catmain.viewholders.CategoriesViewHolder;
 import com.example.mihirmodi.catmain.viewholders.TestsViewHolder;
 
 import java.util.ArrayList;

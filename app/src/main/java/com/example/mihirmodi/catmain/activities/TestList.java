@@ -6,16 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.WindowManager;
 
-import com.example.mihirmodi.catmain.adapters.CategoriesAdapter;
 import com.example.mihirmodi.catmain.adapters.TestsAdapter;
-import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.models.Tests;
 import com.example.mihirmodi.catmain.utils.DatabaseHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class TestList extends AppCompatActivity {
 

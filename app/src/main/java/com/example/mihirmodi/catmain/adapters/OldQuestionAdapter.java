@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mihirmodi.catmain.R;
-import com.example.mihirmodi.catmain.activities.QuestionsMain;
-import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.Question;
 import com.example.mihirmodi.catmain.viewholders.QuestionHeaderViewHolder;
 

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,11 +19,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.mihirmodi.catmain.adapters.DrawerListAdapter;
-import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.DrawerItem;
 import com.example.mihirmodi.catmain.R;
-import com.example.mihirmodi.catmain.models.Tests;
-import com.example.mihirmodi.catmain.utils.DatabaseHelper;
 
 import java.util.ArrayList;
 

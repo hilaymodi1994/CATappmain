@@ -25,7 +25,7 @@ public class Question {
     public Question() {
         this.attempted = 0;
     }
-    private List<Options> optionsList;
+    private List<Option> optionList;
     public int getAttempted() {
         return attempted;
     }
@@ -107,11 +107,11 @@ public class Question {
     public void setTid(int tid) {
         this.tid = tid;
     }
-    public List<Options> getOptionsList() {
-        return optionsList;
+    public List<Option> getOptionList() {
+        return optionList;
     }
 
-    public void setOptionsList(List<Options> optionsList) {
-        this.optionsList = optionsList;
+    public void setOptionList(List<Option> optionList) {
+        this.optionList = optionList;
     }
 }

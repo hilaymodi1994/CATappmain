@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mihirmodi.catmain.R;
+import com.example.mihirmodi.catmain.activities.QuestionFragment;
+import com.example.mihirmodi.catmain.activities.QuizPlayer;
 import com.example.mihirmodi.catmain.models.IWRecyclerItem;
-import com.example.mihirmodi.catmain.models.Options;
+import com.example.mihirmodi.catmain.models.Option;
 import com.example.mihirmodi.catmain.models.Question;
 import com.example.mihirmodi.catmain.viewholders.OptionViewHolder;
 import com.example.mihirmodi.catmain.viewholders.QuestionHeaderViewHolder;
@@ -19,20 +21,20 @@ import java.util.List;
  * Created by mmodi on 2/21/2016.
  */
 public class QuestionRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final QuestionFragment questionFragment;
+    private final QuizPlayer quizPlayer;
     private List<IWRecyclerItem> recyclerItems;
     private Context mContext;
     LayoutInflater inflater;
     final static int TYPE_HEADER = 0, TYPE_OPTION = 1;
-    int flag;
-    int Score;
 
 
-    public QuestionRecyclerAdapter(Context context, List<IWRecyclerItem> recyclerItems,int flag,int Score) {
+    public QuestionRecyclerAdapter(Context context,QuizPlayer quizPlayer,QuestionFragment questionFragment, List<IWRecyclerItem> recyclerItems) {
         this.recyclerItems = recyclerItems;
         this.mContext = context;
         inflater = LayoutInflater.from(context);
-        this.flag=flag;
-        this.Score=Score;
+        this.quizPlayer=quizPlayer;
+        this.questionFragment=questionFragment;
     }
 
 
@@ -46,7 +48,7 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
                 return questionHeaderViewHolder;
             case TYPE_OPTION:
                 rootView = inflater.inflate(R.layout.layout_option, parent, false);
-                OptionViewHolder optionViewHolder = new OptionViewHolder(rootView,flag,Score);
+                OptionViewHolder optionViewHolder = new OptionViewHolder(mContext,rootView,quizPlayer,questionFragment);
                 return optionViewHolder;
         }
         return null;
@@ -57,12 +59,12 @@ public class QuestionRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         switch (getItemViewType(position)){
             case TYPE_HEADER:
                 QuestionHeaderViewHolder view = (QuestionHeaderViewHolder) holder;
-                view.bindQuestionHeaderText((Question) recyclerItems.get(position).getItem(),position,flag);
+                view.bindQuestionHeaderText((Question) recyclerItems.get(position).getItem(),position);
 
                 break;
             case TYPE_OPTION:
                 OptionViewHolder optionViewHolder=(OptionViewHolder)holder;
-                optionViewHolder.bindOption((Options)recyclerItems.get(position).getItem());
+                optionViewHolder.bindOption((Option)recyclerItems.get(position).getItem());
                 break;
         }
 

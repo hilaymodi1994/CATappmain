@@ -1,7 +1,7 @@
 package com.example.mihirmodi.catmain.models;
 
 
-public class Categories {
+public class Category {
     private int id;
     private String name;
     public int getId() {

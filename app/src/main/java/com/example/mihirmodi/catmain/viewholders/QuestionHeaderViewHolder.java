@@ -93,7 +93,7 @@ this.flag=flag;
 
 
 
-    public void bindQuestionHeaderText(final Question questions ,int position, final int flag) {
+    public void bindQuestionHeaderText(final Question questions, int position) {
 
         bindQuestionWithClick(null, questions, position, flag, -1);
         if(flag==0){
