@@ -28,7 +28,8 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/icon"
-        android:layout_toEndOf="@+id/icon" />
+        android:layout_toEndOf="@+id/icon"
+        />
 
     <TextView android:id="@+id/subTitle"
         android:layout_width="wrap_content"

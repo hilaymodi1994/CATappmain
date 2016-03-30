@@ -10,7 +10,7 @@ import com.example.mihirmodi.catmain.activities.IntroductionScreenFragment3;
 import com.example.mihirmodi.catmain.activities.IntroductionScreenFragment4;
 
 /**
- * Created by mihir modi on 1/7/2016.
+ *
  */
 public class AdapterIntroductionScreen extends FragmentPagerAdapter{
     public AdapterIntroductionScreen(FragmentManager fm) {

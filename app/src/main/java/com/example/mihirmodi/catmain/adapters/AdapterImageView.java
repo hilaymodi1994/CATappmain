@@ -13,7 +13,7 @@ import com.example.mihirmodi.catmain.viewholders.ImageViewHolder;
 import java.util.List;
 
 /**
- * Created by lenovo on 02-02-2016.
+ *
  */
 public class AdapterImageView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 private List<Institute> iimImageslides;

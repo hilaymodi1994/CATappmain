@@ -1,8 +1,11 @@
 package com.example.mihirmodi.catmain.viewholders;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -50,14 +53,20 @@ public class CategoriesViewHolder extends RecyclerView.ViewHolder {
 textView_categories.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        String phn = categories.getName();
+
+// To dismiss the dialog
+
+        int phn = categories.getId();
         Intent sIntent = new Intent(context,QuestionsMain.class);
+            Bundle b=new Bundle();
+            b.putInt("phn", categories.getId());
+            sIntent.putExtras(b);
         context.startActivity(sIntent);
 
-        }
 
 
 
+    }
 });
 
     }

@@ -13,7 +13,7 @@ import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.models.DocumentPdfModel;
 
 /**
- * Created by lenovo on 27-01-2016.
+ *
  */
 public class DocumentPdfViewHolder extends RecyclerView.ViewHolder  {
     TextView tv_pdfname;

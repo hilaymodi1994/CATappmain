@@ -11,7 +11,12 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.example.mihirmodi.catmain.models.Categories;
+import com.example.mihirmodi.catmain.models.Options;
 import com.example.mihirmodi.catmain.models.Question;
+import com.example.mihirmodi.catmain.models.QuestionCategories;
+import com.example.mihirmodi.catmain.models.Tests;
+
+import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     SQLiteDatabase db;
@@ -92,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 copyDataBase();
 //                copyTestLogo();
-//                copyImageFiles();
+                copyImageFiles();
 //                copyExtraFiles();
 
                 //-- Add registered user field and remove primary key index from attempt details.
@@ -316,7 +322,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         oldversion = oldVersion;
         if (oldVersion == 1) {
             // copyTestLogo();
-            //  copyImageFiles();
+            copyImageFiles();
             // copyExtraFiles();
 
         }
@@ -396,7 +402,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Categories> getAlldata() {
         ArrayList<Categories> categories = new ArrayList<>();
         SQLiteDatabase db = getWritableDatabase();
-        String[] columns = {"_id","name"};
+        String[] columns = {"_id", "name"};
         Cursor cursor = db.query(CATEGORIES_TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -409,18 +415,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 cat.setName(cursor.getString(cursor.getColumnIndex("name")));
 
 
-
-
                 categories.add(cat);
             } while (cursor.moveToNext());
         }
         return categories;
     }
 
+    public ArrayList<Tests> getAlltest() {
+        ArrayList<Tests> testses = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = {"_id", "name", "allowed_time"};
+        Cursor cursor = db.query(TESTS_TABLE_NAME, columns, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                Tests tests = new Tests();
+                //each step is a 2 part process, find the index of the column first, find the data of that column using
+                //that index and finally set our blank Games object to contain our data
+                tests.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+
+                tests.setName(cursor.getString(cursor.getColumnIndex("name")));
+                tests.setAllowedTime(cursor.getInt(cursor.getColumnIndex("allowed_time")));
+
+
+                testses.add(tests);
+            } while (cursor.moveToNext());
+        }
+        return testses;
+    }
+
     public ArrayList<Question> getAllquestion() {
         ArrayList<Question> questionsArrayList = new ArrayList<>();
+
         SQLiteDatabase db = getWritableDatabase();
-        String[] columns = {"_id","header","content","image_file","answer_text","image_file_ans","year","name","t_id"};
+        String[] columns = {"_id", "header", "content", "image_file", "answer_text", "image_file_ans", "year", "name", "t_id"};
         Cursor cursor = db.query(QUESTIONS_TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -431,14 +459,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 questions.setId(cursor.getInt(cursor.getColumnIndex("_id")));
                 questions.setHeader(cursor.getString(cursor.getColumnIndex("header")));
                 questions.setContent(cursor.getString(cursor.getColumnIndex("content")));
-               // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
-               // questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
-               // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
-               // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
-              //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
-               // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
 
-
+                // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+                questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+                // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+                // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+                //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
 
 
                 questionsArrayList.add(questions);
@@ -446,4 +473,166 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return questionsArrayList;
     }
+
+    /*   public ArrayList<Options> getAllOptions() {
+           ArrayList<Options> OptionArrayList = new ArrayList<>();
+           SQLiteDatabase db = getWritableDatabase();
+           String[] columns = {"_id", "content", "q_id", "correct"};
+           Cursor cursor = db.query(OPTIONS_TABLE_NAME, columns, null, null, null, null, null);
+
+
+           if (cursor != null && cursor.moveToFirst()) {
+               do {
+                   //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                   Options options = new Options();
+
+                   //each step is a 2 part process, find the index of the column first, find the data of that column using
+                   //that index and finally set our blank Games object to contain our data
+                   options.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+
+                   options.setContent(cursor.getString(cursor.getColumnIndex("content")));
+                   options.setQid(cursor.getInt(cursor.getColumnIndex("q_id")));
+                   boolean value = cursor.getString(cursor.getColumnIndex("correct")) == "true";
+                   options.setCorrect(value);
+
+                   // options.setCorrect(cursor.getString.(booleanColumnIndex)));
+                   // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+                   // questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+                   // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+                   // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+                   //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                   // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+
+
+                   OptionArrayList.add(options);
+               } while (cursor.moveToNext());
+           }
+           return OptionArrayList;
+       }*/
+               public ArrayList<Question> getAllQuestionsFilledWithOptions() {
+                ArrayList<Question> questions = getAllquestion();
+                for (Question question : questions) {
+                    List<Options> options = getOptionsForSingleQuestion(question.getId());
+                    question.setOptionsList(options);
+                }
+                return questions;
+            }
+
+            public List<Options> getOptionsForSingleQuestion(int questionID) {
+                List<Options> options = new ArrayList();
+                db = getReadableDatabase();
+                Cursor cursor = db.rawQuery("SELECT * FROM "
+                        + OPTIONS_TABLE_NAME + " WHERE " + "q_id" + "= '" + questionID + "'", null);
+                try {
+                    if (cursor.moveToFirst()) {
+
+                        for (int i = 0; i < cursor.getCount(); i++) {
+
+
+                            do {
+                                //create a new Games object and retrieve the data from the cursor to be stored in this Games object
+                                Options option = new Options();
+
+                                //each step is a 2 part process, find the index of the column first, find the data of that column using
+                                //that index and finally set our blank Games object to contain our data
+                                option.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+
+                                option.setContent(cursor.getString(cursor.getColumnIndex("content")));
+                                option.setQid(cursor.getInt(cursor.getColumnIndex("q_id")));
+                                boolean value = cursor.getString(cursor.getColumnIndex("correct")).equals("true");
+                                option.setCorrect(value);
+
+
+                                // options.setCorrect(cursor.getString.(booleanColumnIndex)));
+                                // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+                                // questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+                                // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+                                // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+                                //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                                // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+                                options.add(option);
+                            } while (cursor.moveToNext());
+                        }
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                } finally {
+                    cursor.close();
+                    db.close();
+                }
+                return options;
+            }
+
+            public ArrayList<Question> getQuestionforcategories(int categoriesId) {
+                ArrayList<Question> questionsArrayList = new ArrayList();
+                db = getReadableDatabase();
+                Cursor cursor = db.rawQuery("SELECT * FROM "
+                        + QUESTIONS_TABLE_NAME + " WHERE " + " _id "  + "IN "+"(SELECT "+"q_id" + " FROM "
+                        + QUESTION_CATEGORIES_TABLE_NAME + " WHERE " + "c_id " + " = '" + categoriesId + "')", null);
+                if (cursor != null && cursor.moveToFirst()) {
+
+                do {
+
+                    Question questions = new Question();
+                    questions.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+                    questions.setHeader(cursor.getString(cursor.getColumnIndex("header")));
+                    questions.setContent(cursor.getString(cursor.getColumnIndex("content")));
+
+                    // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+                    questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+                    // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+                    // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+                    //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                    // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+
+
+                    questionsArrayList.add(questions);
+                } while (cursor.moveToNext());
+            }
+                for (Question question : questionsArrayList) {
+                    List<Options> options = getOptionsForSingleQuestion(question.getId());
+                    question.setOptionsList(options);
+                }
+
+            return questionsArrayList;
+        }
+    public ArrayList<Question> getTestfromtestlist(int testId) {
+        ArrayList<Question> questionsArrayList = new ArrayList();
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "
+                + QUESTIONS_TABLE_NAME + " WHERE " + "t_id" + "= '" + testId + "'", null);
+        if (cursor != null && cursor.moveToFirst()) {
+
+            do {
+
+                Question questions = new Question();
+                questions.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+                questions.setHeader(cursor.getString(cursor.getColumnIndex("header")));
+                questions.setContent(cursor.getString(cursor.getColumnIndex("content")));
+
+                // questions.setImageUrl(cursor.getString(cursor.getColumnIndex("image_file")));
+                questions.setAnswerText(cursor.getString(cursor.getColumnIndex("answer_text")));
+                // questions.setImageUrlAns(cursor.getString(cursor.getColumnIndex("image_file_ans")));
+                // questions.setYear(cursor.getString(cursor.getColumnIndex("year")));
+                //  questions.setName(cursor.getString(cursor.getColumnIndex("name")));
+                // questions.setTid(cursor.getInt(cursor.getColumnIndex("tid")));
+
+
+                questionsArrayList.add(questions);
+            } while (cursor.moveToNext());
+        }
+        for (Question question : questionsArrayList) {
+            List<Options> options = getOptionsForSingleQuestion(question.getId());
+            question.setOptionsList(options);
+        }
+
+        return questionsArrayList;
+    }
+
+
 }
+
+
+
+
+

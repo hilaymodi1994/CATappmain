@@ -19,20 +19,28 @@ public class QuizPlayerPagerAdapter extends FragmentPagerAdapter {
     List<Question> questionsArrayList;
     private DatabaseHelper db;
     Context context;
+    int flag;
+    int Score;
 
-    public QuizPlayerPagerAdapter(Context context,FragmentManager fm, List<Question> questionsList) {
+    public QuizPlayerPagerAdapter(Context context,FragmentManager fm, List<Question> questionsList,int flag) {
         super(fm);
         this.questionsArrayList = questionsList;
         this.context = context;
+        this.flag=flag;
         db = new DatabaseHelper(context.getApplicationContext());
         RecyclerView recyclerView;
+
+
+
     }
 
     @Override
     public Fragment getItem(int position) {
         Question question = questionsArrayList.get(position);
         QuestionFragment questionFragment = new QuestionFragment();
+        questionFragment.setFlag(flag);
         questionFragment.setQuestion(question);
+        questionFragment.setScore(Score);
         return questionFragment;
 
     }
@@ -44,4 +52,3 @@ public class QuizPlayerPagerAdapter extends FragmentPagerAdapter {
 
 
 }
-

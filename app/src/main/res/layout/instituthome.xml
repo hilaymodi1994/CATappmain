@@ -49,7 +49,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="IIM Collages:-"
+                        android:text="IIM Colleges:-"
                         android:textSize="25sp"
                         android:textColor="#fff"/>
 
@@ -111,7 +111,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Non IIM Collages:-"
+                    android:text="Non IIM Colleges:-"
                     android:textSize="25sp"
                     android:textColor="#fff"/>
 
@@ -166,7 +166,7 @@
             android:onClick="viewinstitute"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="View all collages"
+            android:text="View all colleges"
             android:textSize="20sp"
             android:paddingTop="15dp"
             android:layout_gravity="top"

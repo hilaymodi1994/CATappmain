@@ -14,7 +14,7 @@ import com.example.mihirmodi.catmain.models.IimImageView;
 import com.example.mihirmodi.catmain.models.Institute;
 
 /**
- * Created by lenovo on 02-02-2016.
+ *
  */
 public class ImageViewHolder extends RecyclerView.ViewHolder {
     ImageView IImimage;

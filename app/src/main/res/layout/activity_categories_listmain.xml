@@ -24,6 +24,7 @@
     </android.support.v7.widget.Toolbar>
 
 
+
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/toolbar_top"
         android:id="@+id/recycler_view1"

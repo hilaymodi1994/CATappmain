@@ -9,7 +9,7 @@ import retrofit.http.POST;
 
 
 /**
- * Created by mihir modi on 1/11/2016.
+ *
  */
 public interface CatappRetrofitService {
 

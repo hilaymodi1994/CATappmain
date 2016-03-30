@@ -6,6 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">loginActivity</string>
     <string name="app_id">171645563193629</string>
+    <string name="name_of_your_app">CAT app</string>
     <string name="title_activity_splash">CATapp</string>
     <string name="title_activity_login1">login1</string>
     <string name="username">user name</string>
@@ -68,4 +69,18 @@ For Academic queries like eligibility,category and PWD certificate (Monday to Fr
     <string name="title_activity_questions">Questions</string>
     <string name="title_activity_questions_main">QuestionsMain</string>
     <string name="title_activity_quiz_player">QuizPlayer</string>
+    <string name="title_activity_test_list">TestList</string>
+    <string name="title_activity_test_rules">TestRules</string>
+    <string name="rules">Exam duration has been increased to 180 minutes from the existing limit of 170 minutes.\n Quantitave Aptitude(QA) and  verbal  and reading comprehension  (VRC)  will  consist  of 34 questions each and Data  Interpretation and Logical Reasoning (DILR) will have 32 questions.\nSome questions in each section may not be of multiple choice type.Instead,direct answers are to be typed on the screen.\n The tutorials will clearly explain this change.Also,we will allow use of basic on screen calculator for computation.\nCandidates will be allotted exactly 60 minutes for answering questions in each section and they cannot switch from one section to another section while answering questions in a section.
+Tutorial to understand the format of examination will be available on the CAT website from 15th October 2015.
+
+
+
+    </string>
+    <string name="title_activity_extra">ExtraActivity</string>
+    <string name="title_activity_solution">Solution</string>
+    <string name="title_activity_test_main">TestMain</string>
+    <string name="title_activity_score_card">ScoreCard</string>
+
+
 </resources>

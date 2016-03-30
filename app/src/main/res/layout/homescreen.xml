@@ -29,6 +29,7 @@
 
     </android.support.v7.widget.Toolbar>
     <LinearLayout
+        android:background="@drawable/back3"
         android:layout_below="@+id/toolbar_top"
         android:id="@+id/mainContent"
         android:orientation="vertical"
@@ -39,86 +40,71 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/google_deepPurple_500">
-        <RelativeLayout
-            android:onClick="Data"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:background="@drawable/back"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="past year paper practise test"
-            android:background="#000"
-            android:textColor="#fff"
-            android:textSize="20dp"
-            android:id="@+id/t1"
-            />
-        <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+            android:onClick="QUICKTEST"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="40dp"
+            android:textSize="30dp"
+            android:textAlignment="center"
+            android:paddingTop="20dp"
             android:layout_width="match_parent"
-
-            android:layout_below="@+id/t1"
-            android:id="@+id/pager1"
             android:layout_height="match_parent"
-            >
-        </android.support.v4.view.ViewPager>
-        </RelativeLayout>
+            android:text="QUICK TEST"
+            android:textColor="#ffff"
+            android:background="@drawable/back2"/>
+
 
     </LinearLayout>
         <LinearLayout
-
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/google_deepPurple_500">
-            <RelativeLayout
-                android:onClick="paper"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:background="@drawable/back">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="category wise practise test"
-                android:background="#000"
-                android:textColor="#fff"
-                android:textSize="20dp"
-                android:id="@+id/t2"
-                />
-            <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                android:onClick="PRACTISE"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="40dp"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:paddingTop="20dp"
                 android:layout_width="match_parent"
-                android:id="@+id/pager2"
-                android:layout_below="@+id/t2"
                 android:layout_height="match_parent"
-                >
-            </android.support.v4.view.ViewPager>
-            </RelativeLayout>
+                android:text="PRACTICE "
+                android:textColor="#ffff"
+                android:background="@drawable/back2"/>
+
 
         </LinearLayout>
         <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/google_deepPurple_500">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            android:background="@drawable/back">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="premiun practise test"
-                android:background="#000"
-                android:textColor="#fff"
-                android:textSize="20dp"
-                android:id="@+id/t3"
-                />
-            <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                android:onClick="SOLUTION"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="40dp"
+                android:textSize="30dp"
+                android:textAlignment="center"
+                android:paddingTop="20dp"
                 android:layout_width="match_parent"
-                android:id="@+id/pager3"
-                android:layout_below="@+id/t3"
                 android:layout_height="match_parent"
-                >
-            </android.support.v4.view.ViewPager>
-            </RelativeLayout>
-
+                android:text="SOLUTION "
+                android:textColor="#ffff"
+                android:background="@drawable/back2"/>
         </LinearLayout>
 
     </LinearLayout>

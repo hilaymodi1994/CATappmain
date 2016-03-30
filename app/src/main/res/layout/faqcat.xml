@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/pager"
-    android:background="#81D4FA">
+    android:background="@drawable/back3">
     <WebView
         android:id="@+id/webview1"
         android:layout_width="match_parent"

@@ -1,5 +1,7 @@
 package com.example.mihirmodi.catmain.models;
 
+import java.util.List;
+
 public class Question {
     private int id;
     private String header;
@@ -23,7 +25,7 @@ public class Question {
     public Question() {
         this.attempted = 0;
     }
-
+    private List<Options> optionsList;
     public int getAttempted() {
         return attempted;
     }
@@ -104,5 +106,12 @@ public class Question {
 
     public void setTid(int tid) {
         this.tid = tid;
+    }
+    public List<Options> getOptionsList() {
+        return optionsList;
+    }
+
+    public void setOptionsList(List<Options> optionsList) {
+        this.optionsList = optionsList;
     }
 }

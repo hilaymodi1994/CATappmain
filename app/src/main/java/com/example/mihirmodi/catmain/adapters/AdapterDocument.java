@@ -13,7 +13,6 @@ import com.example.mihirmodi.catmain.viewholders.DocumentPdfViewHolder;
 import java.util.List;
 
 /**
- * Created by lenovo on 23-01-2016.
  */
 public class AdapterDocument extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<DocumentPdfModel> documentPDFmodels;

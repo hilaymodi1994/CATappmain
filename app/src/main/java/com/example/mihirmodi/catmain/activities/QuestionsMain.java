@@ -1,9 +1,11 @@
 package com.example.mihirmodi.catmain.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.WindowManager;
 
 import com.example.mihirmodi.catmain.adapters.OldQuestionAdapter;
 import com.example.mihirmodi.catmain.adapters.QuestionRecyclerAdapter;
@@ -19,10 +21,15 @@ public class QuestionsMain extends AppCompatActivity {
     OldQuestionAdapter adapter;
     DatabaseHelper db=new DatabaseHelper(this);
     ArrayList<Question>questionsArrayList;
+    String cid;
+    int phn;
+    int flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_questions_main);
+
 
         assignView();
         //setup adapter
@@ -33,11 +40,15 @@ public class QuestionsMain extends AppCompatActivity {
     }
 
     private void setalldata() {
-        questionsArrayList=db.getAllquestion();
+        Bundle b = getIntent().getExtras();
+        phn= b.getInt("phn");
+        cid=b.getString("phn");
+        flag=0;
+        questionsArrayList= db.getQuestionforcategories(phn);
     }
 
     private void setupAdapter() {
-        adapter=new OldQuestionAdapter(this, questionsArrayList);
+        adapter=new OldQuestionAdapter(this, questionsArrayList,phn,flag);
         recyclerView.setAdapter(adapter);
     }
 
@@ -48,9 +59,12 @@ public class QuestionsMain extends AppCompatActivity {
     }
 
     private void assignView() {
+
+// To dismiss the dialog
+
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view1);
+
     }
 
 
 }
-

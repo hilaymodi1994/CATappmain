@@ -1,5 +1,7 @@
 package com.example.mihirmodi.catmain.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -11,6 +13,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,6 +23,8 @@ import com.example.mihirmodi.catmain.adapters.DrawerListAdapter;
 import com.example.mihirmodi.catmain.models.Categories;
 import com.example.mihirmodi.catmain.models.DrawerItem;
 import com.example.mihirmodi.catmain.R;
+import com.example.mihirmodi.catmain.models.Tests;
+import com.example.mihirmodi.catmain.utils.DatabaseHelper;
 
 import java.util.ArrayList;
 
@@ -27,7 +32,7 @@ public class HomeScreen extends AppCompatActivity {
 
 
         private static String TAG = IntroductionScreen.class.getSimpleName();
-    ViewPager viewPager1;
+
     ActionBarDrawerToggle actionBarDrawerToggle;
     DrawerLayout drawerLayout;
         ListView mDrawerList;
@@ -37,11 +42,14 @@ public class HomeScreen extends AppCompatActivity {
         ImageView imageView_drawerToggle;
         ArrayList<DrawerItem> mNavItems = new ArrayList<DrawerItem>();
 
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.homescreen);
-            viewPager1= (ViewPager) findViewById(R.id.pager1);
+
+
             imageView_drawerToggle=(ImageView)findViewById(R.id.iv_drawerToggle);
 
             mNavItems.add(new DrawerItem("What is CAT?", "", R.drawable.ic_info_black_24dp));
@@ -110,16 +118,37 @@ public class HomeScreen extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert).setTitle("Exit")
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        System.exit(0);
+                    }
+                }).setNegativeButton("No", null).show();
+    }
 
-    public void Data(View v)
+
+    public void PRACTISE(View v)
     {
         Intent intent=new Intent(this,CategoriesListmain.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
-    public void paper(View v)
+    public void QUICKTEST(View v)
     {
-        Intent intent=new Intent(this,QuizPlayer.class);
+        Intent intent=new Intent(this,TestList.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+    public void SOLUTION(View v)
+    {
+        Intent intent=new Intent(this,Solution.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
     private void selectItemFromDrawer(int position) {
 
@@ -129,16 +158,19 @@ public class HomeScreen extends AppCompatActivity {
                 intent = new Intent(HomeScreen.this, AboutCat.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
             case 1:
                 intent = new Intent(HomeScreen.this, ImportantDate.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
             case 2:
                 intent = new Intent(HomeScreen.this, AboutIim.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
            // case 3:
                // intent = new Intent(homescreen.this, Iimcollageslist.class);
@@ -149,21 +181,25 @@ public class HomeScreen extends AppCompatActivity {
                 intent = new Intent(HomeScreen.this,InstitutesHome.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
             case 4:
                 intent = new Intent(HomeScreen.this,ImportantDocument.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
             case 5:
                 intent = new Intent(HomeScreen.this, OfficialContact.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
             case 6:
                 intent = new Intent(HomeScreen.this, FaqCat.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent);
+                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 break;
 
 

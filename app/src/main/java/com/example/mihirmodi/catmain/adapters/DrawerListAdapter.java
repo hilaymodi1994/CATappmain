@@ -14,7 +14,7 @@ import com.example.mihirmodi.catmain.models.DrawerItem;
 import java.util.ArrayList;
 
 /**
- * Created by lenovo on 19-01-2016.
+ *
  */
 public class DrawerListAdapter extends BaseAdapter{ Context mContext;
     ArrayList<DrawerItem> mNavItems;

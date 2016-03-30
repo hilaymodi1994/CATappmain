@@ -13,7 +13,7 @@ import com.example.mihirmodi.catmain.R;
 import com.example.mihirmodi.catmain.models.Institute;
 
 /**
- * Created by lenovo on 27-01-2016.
+ *
  */
 public class InstituteViewHolder extends RecyclerView.ViewHolder {
     TextView tv_iimname;

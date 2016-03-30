@@ -12,7 +12,9 @@
         android:orientation="vertical">
 
 
+
         <TextView
+            android:clickable="true"
             android:id="@+id/textView_categories"
             android:layout_width="match_parent"
             android:layout_height="45dp"

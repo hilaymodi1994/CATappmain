@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.loginscreen);
         findViewById(R.id.pager).requestFocus();
         user = (EditText) findViewById(R.id.user);
@@ -66,10 +68,11 @@ public class LoginScreen extends AppCompatActivity {
         RestAdapter restAdapter=new RestAdapter.Builder().setEndpoint(getString(R.string.baseURL)).build();
         CatappRetrofitService service=restAdapter.create(CatappRetrofitService.class);
 
+
         service.login(emailString, passwordString, hash, new Callback<JsonObject>() {
             @Override
             public void success(JsonObject jsonObject, Response response) {
-
+                Log.d("LOGIN","done");
                 Log.d("Login", "response:" + jsonObject);
                 if (jsonObject.has("authorized") && jsonObject.get("authorized").getAsBoolean()==false) {
                     toast.setText("Invalid username / password");
@@ -80,6 +83,7 @@ public class LoginScreen extends AppCompatActivity {
 
                     Intent intent = new Intent(LoginScreen.this,HomeScreen.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                 }
             }
 
